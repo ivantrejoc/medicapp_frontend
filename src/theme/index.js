@@ -1,0 +1,73 @@
+import { createTheme } from "@mui/material/styles";
+
+export default createTheme({
+  palette: {
+    background: {
+      default: "#F0F0F0"
+    },
+    text: {
+      primary: "rgba(0, 0, 0, 0.87)"
+    }
+  },
+  typography: {
+    fontFamily: ["Lato", "sans-serif"],
+    fontSize: 16,
+    h1: {
+      overflow: "hidden",
+      color: "#F5F5F5",
+      textAlign: "center",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      fontSize: "2.5rem",
+      fontStyle: "normal",
+      fontWeight: "700",
+      lineHeight: "normal",
+      letterSpacing: "0.025rem"
+    },
+    h2: {
+      color: "rgba(72, 72, 72, 0.87)",
+      fontFeatureSettings: "'clig' off, 'liga' off",
+      textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      fontSize: "1.5rem",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "133.4%" /* 2.001rem */
+    },
+    p: {
+      color: "var(--text-primary, rgba(0, 0, 0, 0.87))",
+      fontFeatureSettings: "'clig' off, 'liga' off",
+      fontSize: "1rem",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "1.5rem" /* 150% */,
+      letterSpacing: "0.00938rem"
+    }
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          padding: "0.375rem 1rem",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: "var(--borderRadius, 0.25rem)",
+          background: "#5794F7",
+          boxShadow:
+            "0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.20)"
+        }
+      }
+    }
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920
+    }
+  }
+});
