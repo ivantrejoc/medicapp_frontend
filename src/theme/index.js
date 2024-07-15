@@ -13,6 +13,7 @@ export default createTheme({
     fontFamily: ["Lato", "sans-serif"],
     fontSize: 16,
     h1: {
+      fontFamily: "Lato",
       overflow: "hidden",
       color: "#F5F5F5",
       textAlign: "center",
@@ -21,11 +22,12 @@ export default createTheme({
       textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       fontSize: "2.5rem",
       fontStyle: "normal",
-      fontWeight: "700",
+      fontWeight: "500",
       lineHeight: "normal",
       letterSpacing: "0.025rem"
     },
     h2: {
+      fontFamily: "Lato",
       color: "rgba(72, 72, 72, 0.87)",
       fontFeatureSettings: "'clig' off, 'liga' off",
       textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -35,6 +37,7 @@ export default createTheme({
       lineHeight: "133.4%" /* 2.001rem */
     },
     p: {
+      fontFamily: "Lato",
       color: "var(--text-primary, rgba(0, 0, 0, 0.87))",
       fontFeatureSettings: "'clig' off, 'liga' off",
       fontSize: "1rem",
@@ -49,14 +52,21 @@ export default createTheme({
       styleOverrides: {
         root: {
           display: "flex",
-          padding: "0.375rem 1rem",
-          flexDirection: "column",
+          flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
           borderRadius: "var(--borderRadius, 0.25rem)",
           background: "#5794F7",
           boxShadow:
-            "0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.20)"
+            "0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.20)",
+          color: "var(--primary-contrast, #FFF)",
+          fontFamily: "Lato",
+          fontSize: "1rem",
+          fontStyle: "normal",
+          fontWeight: "600",
+          lineHeight: "1.5rem" /* 171.429% */,
+          letterSpacing: "0.025rem",
+          textTransform: "capitalize"
         }
       }
     }
