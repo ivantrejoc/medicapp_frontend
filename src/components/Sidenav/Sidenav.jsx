@@ -5,7 +5,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Divider,
+  Tooltip,
   Collapse,
   Box,
   Avatar,
@@ -23,7 +23,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const Sidenav = () => {
   const [drawerExpanded, setDrawerExpanded] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(true);
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const toggleDrawer = () => {
     setDrawerExpanded(!drawerExpanded);
@@ -37,24 +37,24 @@ const Sidenav = () => {
     <Drawer
       variant="permanent"
       sx={{
-        width: "14rem",
+        width: { sm: "7rem", md: "14rem" },
         flexShrink: 0,
         boxSizing: "border-box",
         zIndex: 1200,
         "& .MuiDrawer-paper": {
-          width: drawerExpanded ? "14rem" : "5rem",
+          width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
 
           boxSizing: "border-box",
           background: "#E2E2E2",
           display: "flex",
           alignItems: "center",
-          gap: 52
+          gap: { sm: 78, md: 60, xl: 52 }
         }
       }}
     >
       <Box
         sx={{
-          width: drawerExpanded ? "14rem" : "5rem",
+          width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
           maxWidth: "14rem",
           height: "14rem",
           marginTop: 10
@@ -76,12 +76,14 @@ const Sidenav = () => {
             {openDropdown ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
         ) : (
-          <ListItemButton onClick={handleDropdown}>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            {openDropdown ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
+          <Tooltip title="Appointments" placement="right-start">
+            <ListItemButton onClick={handleDropdown}>
+              <ListItemIcon>
+                <CalendarMonthIcon />
+              </ListItemIcon>
+              {openDropdown ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </Tooltip>
         )}
         {drawerExpanded ? (
           <Collapse in={openDropdown} timeout="auto" unmountOnExit>
@@ -103,16 +105,20 @@ const Sidenav = () => {
         ) : (
           <Collapse in={openDropdown} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <EditCalendarIcon />
-                </ListItemIcon>
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemIcon>
-                  <PermContactCalendarIcon />
-                </ListItemIcon>
-              </ListItemButton>
+              <Tooltip title="Schedule Appointment" placement="right-start">
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <EditCalendarIcon />
+                  </ListItemIcon>
+                </ListItemButton>
+              </Tooltip>
+              <Tooltip title="My appointments" placement="right-start">
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <PermContactCalendarIcon />
+                  </ListItemIcon>
+                </ListItemButton>
+              </Tooltip>
             </List>
           </Collapse>
         )}
@@ -121,14 +127,16 @@ const Sidenav = () => {
             <ListItemIcon>
               <FolderIcon />
             </ListItemIcon>
-            <ListItemText primary="My medical hystory" />
+            <ListItemText primary="My medical history" />
           </ListItemButton>
         ) : (
-          <ListItemButton>
-            <ListItemIcon>
-              <FolderIcon />
-            </ListItemIcon>
-          </ListItemButton>
+          <Tooltip title="My medical history" placement="right-start">            
+            <ListItemButton>
+              <ListItemIcon>
+                <FolderIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          </Tooltip>
         )}
       </Box>
       {drawerExpanded && (
