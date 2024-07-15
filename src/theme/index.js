@@ -45,6 +45,27 @@ export default createTheme({
       fontWeight: "400",
       lineHeight: "1.5rem" /* 150% */,
       letterSpacing: "0.00938rem"
+    },
+    avatarName: {
+      color: "var(--text-primary, rgba(0, 0, 0, 0.87))",
+      fontFamily: "Lato",
+      fontSize: "1rem",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "150%" /* 1.5rem */,
+      letterSpacing: "0.00938rem",
+      alignSelf: "stretch"
+    },
+    avatarRole: {
+      color: "var(--text-secondary, rgba(0, 0, 0, 0.60))",
+      fontFeatureSettings: "'clig' off, 'liga' off",
+      fontFamily: "Lato",
+      fontSize: "0.875rem",
+      fontStyle: "normal",
+      fontWeight: "400",
+      lineHeight: "143%" /* 1.25125rem */,
+      letterSpacing: "0.01063rem",
+      alignSelf: "stretch"
     }
   },
   components: {
@@ -67,6 +88,20 @@ export default createTheme({
           lineHeight: "1.5rem" /* 171.429% */,
           letterSpacing: "0.025rem",
           textTransform: "capitalize"
+        }
+      }
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          color: "var(--text-primary, rgba(0, 0, 0, 0.87))",
+          fontFeatureSettings: "'clig' off, 'liga' off",
+          fontFamily: "Lato",
+          fontSize: "0.9rem",
+          fontStyle: "normal",
+          fontWeight: "400",
+          lineHeight: "150%" /* 1.5rem */,
+          letterSpacing: "0.00938rem"
         }
       }
     }

@@ -4,9 +4,15 @@ const ScheduleAppointment = () => {
   return (
     <Box
       sx={{
-        width: "100vw",
-        maxWidth: "100vw",
-        maxHeight: { md: "100vh" }
+        flexGrow: 1,
+        width: "100%",
+        height: "100%",
+        maxWidth: "100%",
+        maxHeight: { md: "100vh" },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden"
       }}
     >
       <Typography variant="h2">Schedule appointment</Typography>
