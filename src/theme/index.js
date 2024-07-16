@@ -89,7 +89,37 @@ export default createTheme({
           letterSpacing: "0.025rem",
           textTransform: "capitalize"
         }
-      }
+      },
+      variants: [
+        {
+          props: { variant: "formButton" },
+          style: {
+            display: "flex",
+            padding: "0.5rem 1.375rem",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            alignSelf: "stretch",
+            borderRadius: "var(--borderRadius, 0.25rem)",
+            background: "#6CF585",
+            boxShadow:
+              "0px 1px 5px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.20)",
+            color: "var(--primary-contrast, #FFF)",
+            fontFeatureSettings: "'clig' off, 'liga' off",
+            fontFamily: "Lato",
+            fontSize: "1rem",
+            fontStyle: "normal",
+            fontWeight: "700",
+            lineHeight: "1.625rem" /* 162.5% */,
+            letterSpacing: "0.02875rem",
+            textTransform: "uppercase",
+            boxsizing: "border-box",
+            "&:hover": {
+              background: "#49EF33"
+            }
+          }
+        }
+      ]
     },
     MuiListItemText: {
       styleOverrides: {

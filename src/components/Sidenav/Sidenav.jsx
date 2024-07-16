@@ -21,8 +21,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-const Sidenav = () => {
-  const [drawerExpanded, setDrawerExpanded] = useState(false);
+const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const toggleDrawer = () => {
@@ -43,7 +42,6 @@ const Sidenav = () => {
         zIndex: 1200,
         "& .MuiDrawer-paper": {
           width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
-
           boxSizing: "border-box",
           background: "#E2E2E2",
           display: "flex",
@@ -130,7 +128,7 @@ const Sidenav = () => {
             <ListItemText primary="My medical history" />
           </ListItemButton>
         ) : (
-          <Tooltip title="My medical history" placement="right-start">            
+          <Tooltip title="My medical history" placement="right-start">
             <ListItemButton>
               <ListItemIcon>
                 <FolderIcon />

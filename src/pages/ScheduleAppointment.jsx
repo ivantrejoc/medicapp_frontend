@@ -1,4 +1,5 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import { ScheduleForm } from "../components/ScheduleForm";
 
 const ScheduleAppointment = () => {
   return (
@@ -15,7 +16,7 @@ const ScheduleAppointment = () => {
         overflow: "hidden"
       }}
     >
-      <Typography variant="h2">Schedule appointment</Typography>
+      <ScheduleForm />
     </Box>
   );
 };
