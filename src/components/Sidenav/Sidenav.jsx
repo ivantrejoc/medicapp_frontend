@@ -98,13 +98,13 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         {drawerExpanded ? (
           <Collapse in={openAppointmens} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton href="/appointments/schedule" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <EditCalendarIcon />
                 </ListItemIcon>
                 <ListItemText primary="Schedule Appointment" />
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton href="/appointments" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <PermContactCalendarIcon />
                 </ListItemIcon>
@@ -116,14 +116,14 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
           <Collapse in={openAppointmens} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <Tooltip title="Schedule Appointment" placement="right-start">
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton href="/appointments/schedule" sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <EditCalendarIcon />
                   </ListItemIcon>
                 </ListItemButton>
               </Tooltip>
               <Tooltip title="My appointments" placement="right-start">
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton href="/appointments" sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <PermContactCalendarIcon />
                   </ListItemIcon>
@@ -153,13 +153,13 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         {drawerExpanded ? (
           <Collapse in={openMedicalHistory} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton href="/history/create" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <HistoryEduIcon />
                 </ListItemIcon>
                 <ListItemText primary="Create Medical History" />
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
+              <ListItemButton href="/history" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
@@ -171,14 +171,14 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
           <Collapse in={openMedicalHistory} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <Tooltip title="Create Medical History" placement="right-start">
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton href="/history/create" sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <HistoryEduIcon />
                   </ListItemIcon>
                 </ListItemButton>
               </Tooltip>
               <Tooltip title="My Medical History" placement="right-start">
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton href="/history" sx={{ pl: 4 }}>
                   <ListItemIcon>
                     <AssignmentIcon />
                   </ListItemIcon>
