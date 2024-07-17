@@ -25,7 +25,8 @@ const MedicalHistory = () => {
       elevation={6}
       sx={{
         display: "flex",
-        width: "39.9375rem",
+        width: { xs: "19.9375rem", md: "39.9375rem" },
+        marginLeft: { xs: "10rem", lg: "0rem" },
         height: "35.4375rem",
         flexDirection: "column",
         justifyContent: "center",

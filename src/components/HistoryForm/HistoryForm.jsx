@@ -4,8 +4,8 @@ import {
   Typography,
   Divider,
   TextField,
-  InputAdornment,  
-  FormControl,  
+  InputAdornment,
+  FormControl,
   FormControlLabel,
   FormGroup,
   Checkbox,
@@ -18,7 +18,8 @@ const HistoryForm = () => {
       elevation={6}
       sx={{
         display: "flex",
-        width: "39.9375rem",
+        width: { xs: "19.9375rem", md: "39.9375rem" },
+        marginLeft: { xs: "10rem", lg: "0rem" },
         height: "35.4375rem",
         flexDirection: "column",
         justifyContent: "center",
@@ -32,8 +33,8 @@ const HistoryForm = () => {
         id="form"
         sx={{
           display: "flex",
-          width: "37.1875rem",
-          height: "29.0625rem",
+          width: { xs: "17.1875rem", md: "37.1875rem" },
+          height: { xs: "31.3125rem", md: "29.0625rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -49,7 +50,7 @@ const HistoryForm = () => {
             alignItems: "flex-start",
             alignSelf: "stretch",
             boxSizing: "border-box",
-            marginBottom: 3.5
+            marginBottom: { xs: 0.5, md: 3.5 }
           }}
         >
           <Box
@@ -69,7 +70,7 @@ const HistoryForm = () => {
           id="inputs-wrapper"
           sx={{
             display: "flex",
-            height: "23.3rem",
+            height: { xs: "28.2rem", md: "23.3rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -80,13 +81,14 @@ const HistoryForm = () => {
           <Box
             id="row-1"
             sx={{
-              display: "flex",
-              padding: "0.625rem",
+              display: { xs: "grid", md: "flex" },
+              gridTemplateColumns: { xs: "repeat(2, 2fr)" },
+              padding: { xs: "0rem", md: "0.625rem" },
               alignItems: "center",
-              gap: "2.1875rem",
+              gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 3.5
+              marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
             <TextField
@@ -184,28 +186,33 @@ const HistoryForm = () => {
           </Box>
           <Box
             id="row-2"
-            sx={{                
+            sx={{
               display: "flex",
-              padding: "0.625rem",
+              flexDirection: { xs: "column", md: "row" },
+              padding: { xs: "0", md: "0.625rem" },
               alignItems: "center",
-              gap: "2.1875rem",
-              paddingX: "0.80rem",
+              gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 3.5
+              marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
             <FormControl>
-              <FormGroup row                
+              <FormGroup
+                row
+                sx={{
+                  display: { xs: "grid", md: "flex" },
+                  gridTemplateColumns: { xs: "repeat(2, 3fr)" }
+                }}
               >
                 <FormControlLabel
                   value="smoking"
                   sx={{
-                    '& .MuiFormControlLabel-label': {
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: "1rem",
-                        fontWeight: "500"
-                      },
+                    "& .MuiFormControlLabel-label": {
+                      fontFamily: "Lato, sans-serif",
+                      fontSize: "1rem",
+                      fontWeight: "500"
+                    }
                   }}
                   control={
                     <Checkbox
@@ -221,12 +228,12 @@ const HistoryForm = () => {
                 />
                 <FormControlLabel
                   value="drugs"
-                 sx={{
-                    '& .MuiFormControlLabel-label': {
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: "1rem",
-                        fontWeight: "500"
-                      },
+                  sx={{
+                    "& .MuiFormControlLabel-label": {
+                      fontFamily: "Lato, sans-serif",
+                      fontSize: "1rem",
+                      fontWeight: "500"
+                    }
                   }}
                   control={
                     <Checkbox
@@ -242,12 +249,12 @@ const HistoryForm = () => {
                 />
                 <FormControlLabel
                   value="hypertension"
-                 sx={{
-                    '& .MuiFormControlLabel-label': {
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: "1rem",
-                        fontWeight: "500"
-                      },
+                  sx={{
+                    "& .MuiFormControlLabel-label": {
+                      fontFamily: "Lato, sans-serif",
+                      fontSize: "1rem",
+                      fontWeight: "500"
+                    }
                   }}
                   control={
                     <Checkbox
@@ -263,12 +270,12 @@ const HistoryForm = () => {
                 />
                 <FormControlLabel
                   value="medication"
-                 sx={{
-                    '& .MuiFormControlLabel-label': {
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: "1rem",
-                        fontWeight: "500"
-                      },
+                  sx={{
+                    "& .MuiFormControlLabel-label": {
+                      fontFamily: "Lato, sans-serif",
+                      fontSize: "1rem",
+                      fontWeight: "500"
+                    }
                   }}
                   control={
                     <Checkbox
@@ -284,12 +291,12 @@ const HistoryForm = () => {
                 />
                 <FormControlLabel
                   value="alcohol"
-                 sx={{
-                    '& .MuiFormControlLabel-label': {
-                        fontFamily: 'Lato, sans-serif',
-                        fontSize: "1rem",
-                        fontWeight: "500"
-                      },
+                  sx={{
+                    "& .MuiFormControlLabel-label": {
+                      fontFamily: "Lato, sans-serif",
+                      fontSize: "1rem",
+                      fontWeight: "500"
+                    }
                   }}
                   control={
                     <Checkbox
@@ -315,7 +322,7 @@ const HistoryForm = () => {
               alignItems: "center",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 5.5
+              marginBottom: { xs: 0.25, md: 5.5 }
             }}
           >
             <TextField
