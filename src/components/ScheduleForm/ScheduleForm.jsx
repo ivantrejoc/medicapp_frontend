@@ -14,7 +14,8 @@ const ScheduleForm = () => {
       elevation={6}
       sx={{
         display: "flex",
-        width: "39.9375rem",
+        width: { xs: "19.9375rem", md: "39.9375rem" },
+        marginLeft: { xs: "10rem", lg: "0rem" },
         height: "35.4375rem",
         flexDirection: "column",
         justifyContent: "center",
@@ -28,8 +29,8 @@ const ScheduleForm = () => {
         id="form"
         sx={{
           display: "flex",
-          width: "37.1875rem",
-          height: "29.0625rem",
+          width: { xs: "17.1875rem", md: "37.1875rem" },
+          height: { xs: "31.3125rem", md: "29.0625rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -45,7 +46,7 @@ const ScheduleForm = () => {
             alignItems: "flex-start",
             alignSelf: "stretch",
             boxSizing: "border-box",
-            marginBottom: 3.5
+            marginBottom: { xs: 0.5, md: 3.5 }
           }}
         >
           <Box
@@ -65,7 +66,7 @@ const ScheduleForm = () => {
           id="inputs-wrapper"
           sx={{
             display: "flex",
-            height: "23.3rem",
+            height: { xs: "28.2rem", md: "23.3rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -77,12 +78,13 @@ const ScheduleForm = () => {
             id="row-1"
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", md: "row" },
               padding: "0.625rem",
               alignItems: "center",
-              gap: "2.1875rem",
+              gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 3.5
+              marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
             <TextField
@@ -147,12 +149,13 @@ const ScheduleForm = () => {
             id="row-2"
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", md: "row" },
               padding: "0.625rem",
               alignItems: "center",
-              gap: "2.1875rem",
+              gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 3.5
+              marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
             <DatePicker
@@ -207,7 +210,7 @@ const ScheduleForm = () => {
               alignItems: "center",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 5.5
+              marginBottom: { xs: 0.25, md: 5.5 }
             }}
           >
             <TextField
