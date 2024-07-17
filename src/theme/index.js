@@ -173,11 +173,16 @@ export default createTheme({
     MuiTableCell: {
       styleOverrides: {
         root: {
-          padding: "0.10rem 1rem",
-          lineHeight: "1.15"
+          padding: "0.10rem 1rem",          
+          lineHeight: "1.15rem",
+          fontSize: "1rem",
+          "@media (max-width: 600px)": {
+            fontSize: "0.65rem",
+            padding: "0.10rem 0.10rem"
+          }
         }
       }
-    },
+    },    
     MuiLink: {
       styleOverrides: {
         root: {

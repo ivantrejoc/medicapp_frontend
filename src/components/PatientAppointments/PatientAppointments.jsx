@@ -12,15 +12,22 @@ import {
   TableRow,
   TableBody,
   Checkbox,
-  TableFooter
+  TableFooter,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import BasicData from "../BasicData/BasicData";
 import Pagination from "../Pagination/Pagination";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 
 const PatientAppointments = () => {
+  const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
   const appointments = [
     {
@@ -149,8 +156,14 @@ const PatientAppointments = () => {
       elevation={6}
       sx={{
         display: "flex",
-        width: { lg: "59.875rem", xxl: "79.875rem" },
-        height: { lg: "30.6875rem", xxxl: "40.6875rem" },
+        width: {
+          xs: "20.875rem",
+          md: "39.875rem",
+          lg: "59.875rem",
+          xxl: "79.875rem"
+        },
+        height: { xs: "28.6875rem", md: "30.6875rem", xxxl: "40.6875rem" },
+        marginLeft: { xs: "10rem", lg: "0rem" },
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
@@ -158,13 +171,14 @@ const PatientAppointments = () => {
         boxSizing: "border-box"
       }}
     >
+      {(isMobile || isTablet) && <BasicData />}
       <Box
         className="dashboard-wrapper"
         sx={{
           display: "flex",
-          width: { lg: "55rem", xxxl: "75rem" },
+          width: { xs: "18.875rem", md: "37rem", lg: "55rem", xxxl: "75rem" },
           height: { lg: "27.0625rem", xxxl: "37.0625rem" },
-          padding: { lg: "0rem", xxxl: "1.5rem" },
+          padding: { xs: "0rem", xxxl: "1.5rem" },
           flexDirection: "column",
           alignItems: "center",
           gap: { lg: "0.5rem", xxxl: "1.5rem" },
@@ -176,7 +190,7 @@ const PatientAppointments = () => {
           className="heading"
           sx={{
             display: "flex",
-            width: { lg: "55rem", xxxl: "75rem" },
+            width: { xs: "18.875rem", md: "37rem", lg: "55rem", xxxl: "75rem" },
             padding: "1rem 0rem 0rem 0rem",
             flexDirection: "column",
             alignItems: "flex-start",
@@ -190,7 +204,7 @@ const PatientAppointments = () => {
           className="dashboard"
           sx={{
             display: "flex",
-            width: { lg: "55rem", xxxl: "75rem" },
+            width: { xs: "18.875rem", md: "37rem", lg: "55rem", xxxl: "75rem" },
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",
@@ -214,9 +228,9 @@ const PatientAppointments = () => {
               size="small"
               startIcon={<EditIcon />}
               sx={{
-                width: {sm: "6.25rem", xxl: "9.25rem" },
-                height: { sm:"1.85rem", xxl: "2.25rem"},
-                fontSize: { sm: "0.55rem", xxl: "1rem" },
+                width: { xs: "5.5rem", sm: "6.25rem", xxl: "9.25rem" },
+                height: { xs: "1.5rem", sm: "1.85rem", xxl: "2.25rem" },
+                fontSize: { xs: "0.45rem", sm: "0.55rem", xxl: "1rem" },
                 flexDirection: "row",
                 fontWeight: "500"
               }}
@@ -228,10 +242,10 @@ const PatientAppointments = () => {
               size="small"
               startIcon={<CloseIcon />}
               sx={{
+                width: { xs: "5.5rem", sm: "6.25rem", xxl: "9.25rem" },
+                height: { xs: "1.5rem", sm: "1.85rem", xxl: "2.25rem" },
+                fontSize: { xs: "0.45rem", sm: "0.55rem", xxl: "1rem" },
                 flexDirection: "row",
-                width: {sm: "6.25rem", xxl: "9.25rem" },
-                height: { sm:"1.85rem", xxl: "2.25rem"},
-                fontSize: { sm: "0.55rem", xxl: "1rem" },
                 fontWeight: "500",
                 background: "#FA7670",
                 "&:hover": {
@@ -252,22 +266,61 @@ const PatientAppointments = () => {
               boxSizing: "border-box"
             }}
           >
-            <TableContainer sx={{ width: "100%" }}>
+            <TableContainer
+              sx={{
+                width: "100%"
+              }}
+            >
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell></TableCell>
-                    <TableCell>Specialism</TableCell>
-                    <TableCell>Professional</TableCell>
-                    <TableCell>Date</TableCell>
-                    <TableCell>Hour</TableCell>
+                    <TableCell
+                      sx={{
+                        width: { xs: "20%", sm: "auto" }
+                      }}
+                    ></TableCell>
+                    <TableCell
+                      sx={{
+                        fontWeight: 700
+                      }}
+                    >
+                      Specialism
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontWeight: 700
+                      }}
+                    >
+                      Professional
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontWeight: 700
+                      }}
+                    >
+                      Date
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontWeight: 700
+                      }}
+                    >
+                      Hour
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {currentAppointments.map((appointment) => (
                     <TableRow key={appointment.id}>
                       <TableCell>
-                        <Checkbox />
+                        <Checkbox
+                          size={"small"}
+                          sx={{
+                            "&.Mui-checked": {
+                              color: "#6CF585"
+                            }
+                          }}
+                        />
                       </TableCell>
                       <TableCell>{appointment.specialism}</TableCell>
                       <TableCell>{appointment.medic_name}</TableCell>
