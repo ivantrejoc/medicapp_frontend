@@ -4,11 +4,18 @@ import {
   Typography,
   Divider,
   TextField,
-  Button
+  Button,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
+import BasicData from "../BasicData/BasicData";
 
 const ScheduleForm = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
   return (
     <Paper
       elevation={6}
@@ -25,12 +32,13 @@ const ScheduleForm = () => {
         boxSizing: "border-box"
       }}
     >
+      {(isMobile || isTablet) && <BasicData />}
       <Box
         id="form"
         sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "37.1875rem" },
-          height: { xs: "31.3125rem", md: "29.0625rem" },
+          height: { xs: "33.3125rem", md: "29.0625rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -234,7 +242,13 @@ const ScheduleForm = () => {
               }}
             />
           </Box>
-          <Button size="large" variant="formButton">
+          <Button
+            size="large"
+            variant="formButton"
+            sx={{
+              height: "2rem"
+            }}
+          >
             Schedule appointment
           </Button>
         </Box>

@@ -1,4 +1,13 @@
-import { Paper, Box, Typography, Divider, Button } from "@mui/material";
+import {
+  Paper,
+  Box,
+  Typography,
+  Divider,
+  Button,
+  useMediaQuery
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import BasicData from "../BasicData/BasicData";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import DisplayData from "../DisplayData/DisplayData";
@@ -20,6 +29,10 @@ const MedicalHistory = () => {
     comorbilities: "Left knee injury."
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
   return (
     <Paper
       elevation={6}
@@ -36,12 +49,13 @@ const MedicalHistory = () => {
         boxSizing: "border-box"
       }}
     >
+      {(isMobile || isTablet) && <BasicData />}
       <Box
         id="form"
         sx={{
           display: "flex",
-          width: "37.1875rem",
-          height: "29.0625rem",
+          width: { xs: "17.1875rem", md: "37.1875rem" },
+          height: { xs: "31.3125rem", md: "29.0625rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -57,7 +71,7 @@ const MedicalHistory = () => {
             alignItems: "flex-start",
             alignSelf: "stretch",
             boxSizing: "border-box",
-            marginBottom: 3.5
+            marginBottom: { xs: 0.5, md: 3.5 }
           }}
         >
           <Box
@@ -77,7 +91,7 @@ const MedicalHistory = () => {
           id="inputs-wrapper"
           sx={{
             display: "flex",
-            height: "23.3rem",
+            height: { xs: "28.2rem", md: "23.3rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -88,12 +102,14 @@ const MedicalHistory = () => {
           <Box
             id="row-1"
             sx={{
-              display: "flex",
+              display: { xs: "grid", md: "flex" },
+              gridTemplateColumns: { xs: "repeat(2, 2fr)" },
+              padding: { xs: "0rem", md: "0.625rem" },
               alignItems: "center",
-              gap: "2.5rem",
+              gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 3.5
+              marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
             <DisplayData label={"Age"} value={riskFactors.age} />
@@ -104,19 +120,20 @@ const MedicalHistory = () => {
           <Box
             id="row-2"
             sx={{
-              display: "flex",
+              display: { xs: "grid", md: "flex" },
+              gridTemplateColumns: { xs: "repeat(2, 3fr)" },
+              padding: { xs: "0", md: "0.625rem" },
               alignItems: "center",
-              height: "2.5rem",
-              gap: "2.4rem",
+              gap: { xs: "1rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 7
+              marginBottom: { xs: 1.5, lg: 3.5 }
             }}
           >
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 gap: "0.25rem",
                 flexShrink: 0,
@@ -154,7 +171,7 @@ const MedicalHistory = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 gap: "0.25rem",
                 flexShrink: 0,
@@ -192,7 +209,7 @@ const MedicalHistory = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 gap: "0.25rem",
                 flexShrink: 0,
@@ -230,7 +247,7 @@ const MedicalHistory = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 gap: "0.25rem",
                 flexShrink: 0,
@@ -268,7 +285,7 @@ const MedicalHistory = () => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 gap: "0.25rem",
                 flexShrink: 0,
@@ -312,7 +329,7 @@ const MedicalHistory = () => {
               alignItems: "center",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: 5.5
+              marginBottom: { xs: 1, md: 3.5, lg: 5.5 }
             }}
           >
             <DisplayDataMulti
@@ -336,6 +353,7 @@ const MedicalHistory = () => {
               size="small"
               startIcon={<EditIcon />}
               sx={{
+                // height
                 paddingX: 1,
                 background: "#EBAE42",
                 textTransform: "uppercase",
@@ -345,7 +363,7 @@ const MedicalHistory = () => {
                 }
               }}
             >
-              Edit Hystory
+              Edit 
             </Button>
             <Button
               size="small"
@@ -360,7 +378,7 @@ const MedicalHistory = () => {
                 }
               }}
             >
-              Delete Hystory
+              Delete 
             </Button>
           </Box>
         </Box>

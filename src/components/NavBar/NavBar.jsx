@@ -1,4 +1,10 @@
-import { Paper, AppBar, Toolbar, Box, Button } from "@mui/material";
+import {
+  Paper,
+  AppBar,
+  Toolbar,
+  Box,
+  Button  
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
@@ -38,7 +44,7 @@ const NavBar = () => {
             height: "4.3125rem",
             padding: "var(--none, 0rem) var(--3, 1.5rem)",
             alignItems: "center",
-            gap: { xs: "13.55rem", md: "30rem", xl: "65rem", xxl: "85rem" },
+            gap: { xs: "13rem", md: "30rem", xl: "65rem", xxl: "85rem" },
             flexShrink: 0,
             alignSelf: "stretch",
             boxSizing: "border-box"
@@ -67,6 +73,7 @@ const NavBar = () => {
               }}
             />
           )}
+
           {isTablet || isMobile ? (
             <BurgerMenu />
           ) : (

@@ -9,10 +9,17 @@ import {
   FormControlLabel,
   FormGroup,
   Checkbox,
-  Button
+  Button,
+  useMediaQuery
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import BasicData from "../BasicData/BasicData";
 
 const HistoryForm = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
   return (
     <Paper
       elevation={6}
@@ -29,6 +36,7 @@ const HistoryForm = () => {
         boxSizing: "border-box"
       }}
     >
+      {(isMobile || isTablet) && <BasicData />}
       <Box
         id="form"
         sx={{
@@ -194,7 +202,7 @@ const HistoryForm = () => {
               gap: { xs: "1.75rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 1.5, md: 3.5 }
+              marginBottom: { xs: 0.5, md: 1.5, lg: 3.5 }
             }}
           >
             <FormControl>
@@ -322,7 +330,7 @@ const HistoryForm = () => {
               alignItems: "center",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 0.25, md: 5.5 }
+              marginBottom: { xs: 1, md: 3.5, lg: 5.5 }
             }}
           >
             <TextField
@@ -346,7 +354,13 @@ const HistoryForm = () => {
               }}
             />
           </Box>
-          <Button size="large" variant="formButton">
+          <Button
+            size="large"
+            variant="formButton"
+            sx={{
+              height: "2rem"
+            }}
+          >
             CREATE MY HISTORY
           </Button>
         </Box>

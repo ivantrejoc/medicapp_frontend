@@ -9,7 +9,7 @@ const DisplayDataMulti = ({ label, value }) => {
       variant="outlined"
       label={label}
       value={value}
-      rows={5}
+      rows={3}
       InputProps={{
         readOnly: true,
         style: { fontFamily: "Lato, sans-serif" }
