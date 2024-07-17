@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMediaQuery } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/index";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,6 +15,8 @@ import "./assets/css/fonts.css";
 
 const App = () => {
   const [drawerExpanded, setDrawerExpanded] = useState(false);
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
   logCredits();
 
@@ -31,10 +34,12 @@ const App = () => {
         >
           <NavBar />
           <Box sx={{ display: "flex", width: "100%" }}>
-            <Sidenav
-              drawerExpanded={drawerExpanded}
-              setDrawerExpanded={setDrawerExpanded}
-            />
+            {!(isTablet || isMobile) && (
+              <Sidenav
+                drawerExpanded={drawerExpanded}
+                setDrawerExpanded={setDrawerExpanded}
+              />
+            )}
             <Box
               component="main"
               sx={{

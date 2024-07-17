@@ -1,6 +1,13 @@
 import { Paper, AppBar, Toolbar, Box, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import LogoutIcon from "@mui/icons-material/Logout";
 const NavBar = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
   return (
     <Paper
       elevation={4}
@@ -31,33 +38,59 @@ const NavBar = () => {
             height: "4.3125rem",
             padding: "var(--none, 0rem) var(--3, 1.5rem)",
             alignItems: "center",
-            gap: { xs: "15vw", sm: "58vw", lg: "80vw" },
+            gap: { xs: "13.55rem", md: "30rem", xl: "65rem", xxl: "85rem" },
             flexShrink: 0,
             alignSelf: "stretch",
             boxSizing: "border-box"
           }}
         >
-          <Box
-            className="medicapp-logo"
-            sx={{
-              width: "8.9375rem",
-              height: "3.0625rem",
-              background:
-                "url('/img/medicapp-logo.png') 100% / cover no-repeat",
-              boxSizing: "border-box"
-            }}
-          />
-
-          <Button
+          {isMobile ? (
+            <Box
+              className="medicapp-logo"
+              sx={{
+                width: "3.0625rem",
+                height: "3.0625rem",
+                background:
+                  "url('/img/medicapp-cross-no-bg.png') 100% / cover no-repeat",
+                boxSizing: "border-box"
+              }}
+            />
+          ) : (
+            <Box
+              className="medicapp-logo"
+              sx={{
+                width: "8.9375rem",
+                height: "3.0625rem",
+                background:
+                  "url('/img/medicapp-logo.png') 100% / cover no-repeat",
+                boxSizing: "border-box"
+              }}
+            />
+          )}
+          {isTablet || isMobile ? (
+            <BurgerMenu />
+          ) : (
+            <Button
+              size="medium"
+              startIcon={<LogoutIcon />}
+              variant="contained"
+              sx={{
+                width: { lg: "11rem" }
+              }}
+            >
+              Sign out
+            </Button>
+          )}
+          {/* <Button
             size="medium"
             startIcon={<LogoutIcon />}
             variant="contained"
             sx={{
-              width: { lg: "8.5rem" }
+              width: { lg: "11rem" }
             }}
           >
             Sign out
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
     </Paper>

@@ -169,15 +169,39 @@ export default createTheme({
           letterSpacing: "0.00938rem"
         }
       }
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: "0.10rem 1rem",
+          lineHeight: "1.15"
+        }
+      }
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: "var(--text-primary, rgba(0, 0, 0, 0.87))",
+          textDecoration: "none",
+          "&:hover": {
+            color: "#5794F7"
+          },
+          "&:active": {
+            color: "#5794F7"
+          }
+        }
+      }
     }
   },
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920
+      sm: 576,
+      md: 768,
+      lg: 992,
+      xl: 1200,
+      xxl: 1530,
+      xxxl: 1710
     }
   }
 });
