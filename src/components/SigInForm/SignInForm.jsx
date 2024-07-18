@@ -25,7 +25,7 @@ const SignInForm = () => {
         alignItems: "center",
         width: { xs: "19.9375rem", md: "34.5rem" },
         height: { xs: "28.4375rem", md: "35.4375rem" },
-        marginLeft: { xs: "10rem", lg: "0rem" },
+        marginLeft: { xs: "9.5rem", lg: "0rem" },
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
         boxSizing: "border-box"
