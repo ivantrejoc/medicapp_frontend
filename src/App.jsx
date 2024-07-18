@@ -18,6 +18,9 @@ const App = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
+  const hideNavs = ["/", "/signup"].includes(location.pathname);
+  console.log("HIDENAVS: ", hideNavs);
+
   logCredits();
 
   return (
@@ -32,19 +35,21 @@ const App = () => {
             overflow: "hidden"
           }}
         >
-          <NavBar />
+          {!hideNavs && <NavBar />}
+
           <Box sx={{ display: "flex", width: "100%" }}>
-            {!(isTablet || isMobile) && (
+            {!hideNavs && !(isTablet || isMobile) && (
               <Sidenav
                 drawerExpanded={drawerExpanded}
                 setDrawerExpanded={setDrawerExpanded}
               />
             )}
+
             <Box
               component="main"
               sx={{
                 flexGrow: 1,
-                height: "calc(100vh - 4.4375rem)",
+                height: !hideNavs ? "calc(100vh - 4.4375rem)" : "100vh",
                 width: "100vw",
                 marginLeft: drawerExpanded ? "0rem" : "-10rem",
                 transition: "margin-left 0.3s ease",

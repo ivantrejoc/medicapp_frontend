@@ -16,15 +16,16 @@ export default createTheme({
       fontFamily: "Lato",
       overflow: "hidden",
       color: "#F5F5F5",
-      textAlign: "center",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
+      textAlign: "center",      
       textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       fontSize: "2.5rem",
       fontStyle: "normal",
       fontWeight: "500",
       lineHeight: "normal",
-      letterSpacing: "0.025rem"
+      letterSpacing: "0.025rem",
+      "@media (max-width: 600px)": {
+      fontSize: "1.5rem"
+      }
     },
     h2: {
       fontFamily: "Lato",

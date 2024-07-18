@@ -49,7 +49,7 @@ const BurgerMenu = () => {
           <Link href="/history">My medical history</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link href="/signin">Sign out</Link>
+          <Link href="/">Sign out</Link>
         </MenuItem>
       </Menu>
     </div>

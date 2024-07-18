@@ -318,6 +318,9 @@ const PatientAppointments = () => {
                           sx={{
                             "&.Mui-checked": {
                               color: "#6CF585"
+                            },
+                            "& .MuiSvgIcon-root": {
+                              fontSize: { xs: 17, md: 20, lg: 25 }
                             }
                           }}
                         />
