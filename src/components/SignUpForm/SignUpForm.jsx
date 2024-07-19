@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Paper,
   Box,
@@ -8,17 +7,30 @@ import {
   Button,
   Link
 } from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "../PhoneInput/PhoneInput";
 import medicappLogo from "/img/medicapp-logo.png";
 
 const SignInForm = () => {
-  const [phone, setPhone] = useState("");
-
-  const handlePhoneChange = (phone) => {
-    setPhone(phone);
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      name: "",
+      surname: "",
+      email: "",
+      phone: "",
+      role: "Patient",
+      password: "",
+      repeatPassword: ""
+    }
+  });
+  const onSubmit = (data) => {
+    console.log(data);
   };
-
-  console.log(window.innerHeight);
 
   return (
     <Paper
@@ -59,7 +71,7 @@ const SignInForm = () => {
         />
       </Box>
       <Box
-        id="form"
+        className="form"
         sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
@@ -71,7 +83,7 @@ const SignInForm = () => {
         }}
       >
         <Box
-          id="title-wrapper"
+          className="title-wrapper"
           sx={{
             display: "flex",
             padding: "var(--2, 1rem) var(--none, 0rem)",
@@ -83,7 +95,7 @@ const SignInForm = () => {
           }}
         >
           <Box
-            id="title-container"
+            className="title-container"
             sx={{
               display: "flex",
               alignItems: "flex-start",
@@ -96,7 +108,9 @@ const SignInForm = () => {
           <Divider sx={{ width: "100%", marginTop: 1 }} />
         </Box>
         <Box
-          id="inputs-wrapper"
+          className="inputs-wrapper"
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
           sx={{
             display: "flex",
             height: { xs: "28rem", md: "34.2rem" },
@@ -108,7 +122,7 @@ const SignInForm = () => {
           }}
         >
           <Box
-            id="row-1"
+            className="row-1"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -120,111 +134,212 @@ const SignInForm = () => {
               marginBottom: { xs: 1.5, md: 2 }
             }}
           >
-            <TextField
-              size="small"
-              variant="outlined"
-              label="Email address"
-              type="email"
-              placeholder="jhon@mail.com"
-              SelectProps={{
-                native: true
-              }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                width: "100%",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  message: "Email not valid"
                 }
               }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  variant="outlined"
+                  label="Email address"
+                  type="text"
+                  placeholder="jhon@mail.com"
+                  error={!!errors.email}
+                  helperText={errors.email ? errors.email.message : null}
+                  SelectProps={{
+                    native: true
+                  }}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  sx={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
-            <TextField
-              size="small"
-              variant="outlined"
-              type="text"
-              label="Name"
-              placeholder="Jhon"
-              SelectProps={{
-                native: true
-              }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                width: "100%",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
+            <Controller
+              name="name"
+              control={control}
+              rules={{
+                required: "Name is required",
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Name not valid"
                 }
               }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  variant="outlined"
+                  type="text"
+                  label="Name"
+                  placeholder="Jhon"
+                  error={!!errors.name}
+                  helperText={errors.name ? errors.name.message : null}
+                  SelectProps={{
+                    native: true
+                  }}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  sx={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
-            <TextField
-              size="small"
-              variant="outlined"
-              type="text"
-              label="Surname"
-              placeholder="Doe"
-              SelectProps={{
-                native: true
-              }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                width: "100%",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
+            <Controller
+              name="surname"
+              control={control}
+              rules={{
+                required: "Surname is required",
+                pattern: {
+                  value: /^[a-zA-Z]+$/,
+                  message: "Surname not valid"
                 }
               }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  variant="outlined"
+                  type="text"
+                  label="Surname"
+                  placeholder="Doe"
+                  error={!!errors.surname}
+                  helperText={errors.surname ? errors.surname.message : null}
+                  SelectProps={{
+                    native: true
+                  }}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  sx={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
-            <PhoneInput value={phone} onChange={handlePhoneChange} />
+            <Controller
+              name="phone"
+              control={control}
+              rules={{
+                required: "Phone is required",
+                pattern: {
+                  value: /^\+[\d*]{6,15}$/,
+                  message: "Phone not valid"
+                }
+              }}
+              render={({ field }) => (
+                <PhoneInput
+                  {...field}
+                  label="phone"
+                  type="text"
+                  error={!!errors.phone}
+                  helperText={errors.phone ? errors.phone.message : null}
+                />
+              )}
+            />
 
-            <TextField
-              size="small"
-              variant="outlined"
-              label="Password"
-              type="password"
-              placeholder="Type your password"
-              SelectProps={{
-                native: true
-              }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                width: "100%",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Password is required",
+                pattern: {
+                  value:
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)[a-zA-Z\d\W]{1,8}$/,
+                  message:
+                    "Max 8 characters, includes 1 uppercase, 1 lowercase, 1 special character"
                 }
               }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  variant="outlined"
+                  label="Password"
+                  type="password"
+                  placeholder="Type your password"
+                  error={!!errors.password}
+                  helperText={errors.password ? errors.password.message : null}
+                  SelectProps={{
+                    native: true
+                  }}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  sx={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
-            <TextField
-              size="small"
-              variant="outlined"
-              type="password"
-              label="Confirm password"
-              placeholder="Repeat your password"
-              SelectProps={{
-                native: true
+            <Controller
+              name="repeatPassword"
+              control={control}
+              rules={{
+                required: "Please repeat your password",
+                validate: (value) =>
+                  value === getValues("password") || "Passwords do not match"
               }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                width: "100%",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
-                }
-              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size="small"
+                  variant="outlined"
+                  type="password"
+                  label="Confirm password"
+                  placeholder="Repeat your password"
+                  error={!!errors.repeatPassword}
+                  helperText={
+                    errors.repeatPassword ? errors.repeatPassword.message : null
+                  }
+                  SelectProps={{
+                    native: true
+                  }}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  sx={{
+                    width: "100%",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
           </Box>
           <Box
-            id="row-2"
+            className="row-2"
             sx={{
               display: "flex",
               height: "2rem",
@@ -251,6 +366,7 @@ const SignInForm = () => {
             </Link>
           </Box>
           <Button
+            type="submit"
             size="medium"
             variant="formButton"
             sx={{

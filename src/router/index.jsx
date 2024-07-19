@@ -15,10 +15,10 @@ const Router = () => {
     {
       path: "/signup",
       element: <SignUp />
-    },    
+    },
     {
       path: "/appointments",
-      element: <Appointments/>
+      element: <Appointments />
     },
     {
       path: "/appointments/schedule",

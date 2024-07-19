@@ -24,7 +24,7 @@ const SignIn = () => {
     >
       {isMobile || isTablet ? (
         <Box
-          classname="wrapper"
+          class="wrapper"
           sx={{
             display: "flex",
             width: "100%",
@@ -32,7 +32,7 @@ const SignIn = () => {
           }}
         >
           <Box
-            classname="screen-wrapper"
+            class="screen-wrapper"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -68,7 +68,7 @@ const SignIn = () => {
         </Box>
       ) : (
         <Box
-          classname="wrapper"
+          class="wrapper"
           sx={{
             display: "flex",
             width: "100%",
@@ -76,7 +76,7 @@ const SignIn = () => {
           }}
         >
           <Box
-            classname="left-side"
+            class="left-side"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -106,7 +106,7 @@ const SignIn = () => {
               Welcome to your medical appointment manager
             </Typography>
             <Box
-              classname="image"
+              class="image"
               sx={{
                 width: "35.875rem",
                 height: "35.875rem",
@@ -118,7 +118,7 @@ const SignIn = () => {
             ></Box>
           </Box>
           <Box
-            classname="right-side"
+            class="right-side"
             sx={{
               display: "flex",
               flexDirection: "column",

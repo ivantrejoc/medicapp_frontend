@@ -1,7 +1,23 @@
+import { useEffect } from "react";
 import { Box } from "@mui/material";
 import { ScheduleForm } from "../components/ScheduleForm";
+import { getUserById } from "../api/userService";
 
 const ScheduleAppointment = () => {
+  // const id = 2;
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await getUserById(id);
+  //       console.log(response);
+  //       return(response);
+  //     } catch (error) {
+  //       console.error("Error fetching user:", error);
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [id]);
+
   return (
     <Box
       sx={{

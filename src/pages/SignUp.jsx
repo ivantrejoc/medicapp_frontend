@@ -19,12 +19,12 @@ const SignIn = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden"
+        overflowX: "hidden"
       }}
     >
       {isMobile || isTablet ? (
         <Box
-          classname="wrapper"
+          className="wrapper"
           sx={{
             display: "flex",
             width: "100%",
@@ -32,7 +32,7 @@ const SignIn = () => {
           }}
         >
           <Box
-            classname="screen-wrapper"
+            className="screen-wrapper"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -68,7 +68,7 @@ const SignIn = () => {
         </Box>
       ) : (
         <Box
-          classname="wrapper"
+          className="wrapper"
           sx={{
             display: "flex",
             width: "100%",
@@ -76,7 +76,7 @@ const SignIn = () => {
           }}
         >
           <Box
-            classname="left-side"
+            className="left-side"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -106,7 +106,7 @@ const SignIn = () => {
               Create your account
             </Typography>
             <Box
-              classname="image"
+              className="image"
               sx={{
                 width: "35.875rem",
                 height: "35.875rem",
@@ -118,7 +118,7 @@ const SignIn = () => {
             ></Box>
           </Box>
           <Box
-            classname="right-side"
+            className="right-side"
             sx={{
               display: "flex",
               flexDirection: "column",

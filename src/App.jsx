@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMediaQuery } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
-import Router from "./router/index";
+import Router from "./router";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline, Box } from "@mui/material";
 import theme from "./theme";
@@ -19,7 +19,6 @@ const App = () => {
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
   const hideNavs = ["/", "/signup"].includes(location.pathname);
-  console.log("HIDENAVS: ", hideNavs);
 
   logCredits();
 

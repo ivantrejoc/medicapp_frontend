@@ -44,7 +44,7 @@ const PhoneInput = ({ value, onChange, ...restProps }) => {
           >
             <Select
               MenuProps={{
-                style: {                    
+                style: {
                   height: "300px",
                   width: "360px",
                   top: "10px",
@@ -55,8 +55,8 @@ const PhoneInput = ({ value, onChange, ...restProps }) => {
                   horizontal: "left"
                 }
               }}
-              sx={{               
-                width: "max-content",                
+              sx={{
+                width: "max-content",
                 fieldset: {
                   display: "none"
                 },
@@ -64,7 +64,7 @@ const PhoneInput = ({ value, onChange, ...restProps }) => {
                   fieldset: {
                     display: "block"
                   }
-                },                
+                },
                 ".MuiSelect-select": {
                   padding: "8px",
                   paddingRight: "24px !important"
