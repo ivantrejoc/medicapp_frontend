@@ -9,11 +9,27 @@ import {
   useMediaQuery
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useForm, Controller } from "react-hook-form";
 import medicappLogo from "/img/medicapp-logo.png";
 
 const SignInForm = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const {
+    handleSubmit,
+    control,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: ""
+    }
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <Paper
@@ -24,7 +40,7 @@ const SignInForm = () => {
         justifyContent: "flex-start",
         alignItems: "center",
         width: { xs: "19.9375rem", md: "34.5rem" },
-        height: { xs: "28.4375rem", md: "35.4375rem" },
+        height: { xs: "30.4375rem", md: "37.4375rem" },
         marginLeft: { xs: "9.5rem", lg: "0rem" },
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
@@ -54,7 +70,7 @@ const SignInForm = () => {
         ></Box>
       </Box>
       <Box
-        id="form"
+        className="form"
         sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
@@ -66,7 +82,7 @@ const SignInForm = () => {
         }}
       >
         <Box
-          id="title-wrapper"
+          className="title-wrapper"
           sx={{
             display: "flex",
             padding: "var(--2, 1rem) var(--none, 0rem)",
@@ -78,7 +94,7 @@ const SignInForm = () => {
           }}
         >
           <Box
-            id="title-container"
+            className="title-container"
             sx={{
               display: "flex",
               alignItems: "flex-start",
@@ -91,7 +107,9 @@ const SignInForm = () => {
           <Divider sx={{ width: "100%", marginTop: 1 }} />
         </Box>
         <Box
-          id="inputs-wrapper"
+          className="inputs-wrapper"
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
           sx={{
             display: "flex",
             height: { xs: "14rem", md: "20rem" },
@@ -103,7 +121,7 @@ const SignInForm = () => {
           }}
         >
           <Box
-            id="row-1"
+            className="row-1"
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -115,49 +133,85 @@ const SignInForm = () => {
               marginBottom: { xs: 1.5, md: 2 }
             }}
           >
-            <TextField
-              size={isMobile ? "small" : "medium"}
-              variant="outlined"
-              label="Email address"
-              placeholder="jhon@mail.com"
-              SelectProps={{
-                native: true
-              }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                display: "flex",
-                width: "100%",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                  message: "Email not valid"
                 }
               }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size={isMobile ? "small" : "medium"}
+                  variant="outlined"
+                  label="Email address"
+                  placeholder="jhon@mail.com"
+                  error={!!errors.email}
+                  helperText={errors.email ? errors.email.message : null}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
+                  }}
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
-            <TextField
-              size={isMobile ? "small" : "medium"}
-              variant="outlined"
-              label="Password"
-              placeholder="jhon@mail.com"
-              SelectProps={{
-                native: true
+
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: "Password is required"
               }}
-              InputLabelProps={{
-                shrink: true
-              }}
-              sx={{
-                display: "flex",
-                width: "100%",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                boxSizing: "border-box",
-                "& .MuiInputBase-root": {
-                  width: "100%"
-                }
-              }}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size={isMobile ? "small" : "medium"}
+                  variant="outlined"
+                  label="Password"
+                  placeholder="Type your password"
+                  type="password"
+                  error={!!errors.password}
+                  helperText={errors.password ? errors.password.message : null}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
+                  }}
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    boxSizing: "border-box",
+                    "& .MuiInputBase-root": {
+                      width: "100%"
+                    }
+                  }}
+                />
+              )}
             />
           </Box>
           <Box
@@ -196,13 +250,14 @@ const SignInForm = () => {
                 fontStyle: "normal",
                 fontWeight: "500",
                 lineHeight: "143%",
-                letterSpacing: {xs: 0, md: "0.01063rem"}
+                letterSpacing: { xs: 0, md: "0.01063rem" }
               }}
             >
               Forgot password?
             </Link>
           </Box>
           <Button
+            type="submit"
             size="medium"
             variant="formButton"
             sx={{

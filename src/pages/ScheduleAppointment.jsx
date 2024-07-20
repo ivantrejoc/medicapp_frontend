@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import { Box } from "@mui/material";
 import { ScheduleForm } from "../components/ScheduleForm";
-import { getUserById } from "../api/userService";
+
 
 const ScheduleAppointment = () => {
   // const id = 2;

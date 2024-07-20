@@ -6,11 +6,11 @@ import doctor from "/img/doctor-1.png";
 const SignIn = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.only("md"));  
 
   return (
     <Box
-      sx={{
+      sx={{        
         flexGrow: 1,
         width: "100%",
         height: "100%",
@@ -19,16 +19,19 @@ const SignIn = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflowX: "hidden"
+        overflowX: "hidden",
+        overflowY: {xs:"visible", md:"hidden"}
+
       }}
     >
       {isMobile || isTablet ? (
         <Box
           className="wrapper"
           sx={{
+            background: "red",
             display: "flex",
             width: "100%",
-            height: "100vh"
+            height: "100%"
           }}
         >
           <Box
@@ -42,7 +45,7 @@ const SignIn = () => {
               gap: {xs:0, md:3},
               background:
                 "linear-gradient(180deg, #6CF5B3 0%, #9DEDC6 81.32%, #6CF5E0 100%)",
-              height: "100%",
+              height: {xs:"120vh", md:"100%"},
               width: "100%",
               boxSizing: "border-box"
             }}
@@ -69,20 +72,20 @@ const SignIn = () => {
       ) : (
         <Box
           className="wrapper"
-          sx={{
+          sx={{           
             display: "flex",
             width: "100%",
-            height: "100vh"
+            height: "100%",            
           }}
         >
           <Box
             className="left-side"
-            sx={{
+            sx={{              
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: 5,
+              gap: {lg:0.5, xxl:5},
               background:
                 "linear-gradient(180deg, #6CF5B3 0%, #9DEDC6 81.32%, #6CF5E0 100%)",
               height: "100%",
@@ -108,8 +111,8 @@ const SignIn = () => {
             <Box
               className="image"
               sx={{
-                width: "35.875rem",
-                height: "35.875rem",
+                width: {lg:"30.875rem", xxl:"35.875rem"},
+                height: {lg:"30.875rem", xxl:"35.875rem"},
                 marginLeft: 15,
                 flexShrink: 0,
                 boxSizing: "border-box",
@@ -125,7 +128,7 @@ const SignIn = () => {
               justifyContent: "center",
               alignItems: "center",
               height: "100%",
-              width: "50%"
+              width: "50%"             
             }}
           >
             <SignUpForm />

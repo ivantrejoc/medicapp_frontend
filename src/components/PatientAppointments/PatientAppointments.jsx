@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Paper,
   Box,
@@ -20,136 +20,46 @@ import BasicData from "../BasicData/BasicData";
 import Pagination from "../Pagination/Pagination";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
+import { getAppointmentsById } from "../../services/appointmentsServices";
 
 const PatientAppointments = () => {
   const theme = useTheme();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
-  const appointments = [
-    {
-      id: 2,
-      patient_id: 2,
-      medic_id: 2,
-      specialism_id: 2,
-      appointment_date: "2024-07-16T00:00:00.000Z",
-      appointment_hour: "10:00:00",
-      comments: "Patient has a persistent rash on the face and arms.",
-      patient_name: "Jane",
-      medic_name: "Sarah",
-      specialism: "Dermatology"
-    },
-    {
-      id: 12,
-      patient_id: 2,
-      medic_id: 2,
-      specialism_id: 2,
-      appointment_date: "2024-07-26T00:00:00.000Z",
-      appointment_hour: "11:30:00",
-      comments: "Patient’s rash has spread. Needs further examination.",
-      patient_name: "Jane",
-      medic_name: "Sarah",
-      specialism: "Dermatology"
-    },
-    {
-      id: 23,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-26T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is a test comment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 24,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-26T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 25,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-25T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 35,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-25T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 40,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-25T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 16,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-25T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    },
-    {
-      id: 8,
-      patient_id: 2,
-      medic_id: 3,
-      specialism_id: 5,
-      appointment_date: "2024-07-25T00:00:00.000Z",
-      appointment_hour: "15:35:00",
-      comments: "This is other appointment",
-      patient_name: "Jane Doe",
-      medic_name: "James Brown",
-      specialism: "Oncology"
-    }
-  ];
+  useEffect(() => {
+    const id = 2;
+    const fetchAppointmentsById = async (id) => {
+      const response = await getAppointmentsById(id);
+      setAppointments(response);
+      setLoading(false);
+    };
+
+    fetchAppointmentsById(id);
+  }, []);
 
   const indexOfLastAppointment = currentPage * pageSize;
   const indexOfFirstAppointment = indexOfLastAppointment - pageSize;
-  const currentAppointments = appointments?.slice(
-    indexOfFirstAppointment,
-    indexOfLastAppointment
-  );
+
+  const currentAppointments =
+    Array.isArray(appointments) && appointments.length > 0
+      ? appointments.slice(indexOfFirstAppointment, indexOfLastAppointment)
+      : [];
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  // console.log("LOS CURRENT: ", currentAppointments);
+
+  if (loading) {
+    return <p>LOADING...</p>;
+  }
 
   return (
     <Paper
@@ -310,31 +220,32 @@ const PatientAppointments = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {currentAppointments.map((appointment) => (
-                    <TableRow key={appointment.id}>
-                      <TableCell>
-                        <Checkbox
-                          size={"small"}
-                          sx={{
-                            "&.Mui-checked": {
-                              color: "#6CF585"
-                            },
-                            "& .MuiSvgIcon-root": {
-                              fontSize: { xs: 17, md: 20, lg: 25 }
-                            }
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell>{appointment.specialism}</TableCell>
-                      <TableCell>{appointment.medic_name}</TableCell>
-                      <TableCell>
-                        {appointment.appointment_date.slice(0, 10)}
-                      </TableCell>
-                      <TableCell>
-                        {appointment.appointment_hour.slice(0, 5)}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {currentAppointments &&
+                    currentAppointments.map((appointment) => (
+                      <TableRow key={appointment.id}>
+                        <TableCell>
+                          <Checkbox
+                            size={"small"}
+                            sx={{
+                              "&.Mui-checked": {
+                                color: "#6CF585"
+                              },
+                              "& .MuiSvgIcon-root": {
+                                fontSize: { xs: 17, md: 20, lg: 25 }
+                              }
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell>{appointment.specialism}</TableCell>
+                        <TableCell>{appointment.medic_name}</TableCell>
+                        <TableCell>
+                          {appointment.appointment_date?.slice(0, 10)}
+                        </TableCell>
+                        <TableCell>
+                          {appointment.appointment_hour?.slice(0, 5)}
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
                 <TableFooter>
                   <TableRow

@@ -10,6 +10,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "../PhoneInput/PhoneInput";
 import medicappLogo from "/img/medicapp-logo.png";
+import { createPatient } from "../../services/userService";
 
 const SignInForm = () => {
   const {
@@ -28,8 +29,19 @@ const SignInForm = () => {
       repeatPassword: ""
     }
   });
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { name, surname, email, phone, role, password } = data;
+    const patientData = {
+      name,
+      surname,
+      email,
+      phone,
+      role,
+      password
+    };
+    const response = await createPatient(patientData);
+    const responseMessage = response.body.message;
+    alert(responseMessage);
   };
 
   return (
@@ -41,7 +53,7 @@ const SignInForm = () => {
         justifyContent: "flex-start",
         alignItems: "center",
         width: { xs: "19.9375rem", md: "34.5rem" },
-        height: { xs: "37.2375rem", md: "44.6875rem" },
+        height: { xs: "43.2375rem", md: "45.6875rem" },
         marginLeft: { xs: "9.5rem", lg: "0rem" },
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
@@ -128,10 +140,10 @@ const SignInForm = () => {
               flexDirection: "column",
               padding: "0.625rem",
               alignItems: "center",
-              gap: { xs: "1.5rem", md: "2rem" },
+              gap: "1rem",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 1.5, md: 2 }
+              marginBottom: { xs: 0, md: 1.5 }
             }}
           >
             <Controller
@@ -154,11 +166,14 @@ const SignInForm = () => {
                   placeholder="jhon@mail.com"
                   error={!!errors.email}
                   helperText={errors.email ? errors.email.message : null}
-                  SelectProps={{
-                    native: true
-                  }}
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
                   }}
                   sx={{
                     width: "100%",
@@ -190,11 +205,14 @@ const SignInForm = () => {
                   placeholder="Jhon"
                   error={!!errors.name}
                   helperText={errors.name ? errors.name.message : null}
-                  SelectProps={{
-                    native: true
-                  }}
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
                   }}
                   sx={{
                     width: "100%",
@@ -226,11 +244,14 @@ const SignInForm = () => {
                   placeholder="Doe"
                   error={!!errors.surname}
                   helperText={errors.surname ? errors.surname.message : null}
-                  SelectProps={{
-                    native: true
-                  }}
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
                   }}
                   sx={{
                     width: "100%",
@@ -259,6 +280,12 @@ const SignInForm = () => {
                   type="text"
                   error={!!errors.phone}
                   helperText={errors.phone ? errors.phone.message : null}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
+                  }}
                 />
               )}
             />
@@ -285,11 +312,14 @@ const SignInForm = () => {
                   placeholder="Type your password"
                   error={!!errors.password}
                   helperText={errors.password ? errors.password.message : null}
-                  SelectProps={{
-                    native: true
-                  }}
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
                   }}
                   sx={{
                     width: "100%",
@@ -321,11 +351,14 @@ const SignInForm = () => {
                   helperText={
                     errors.repeatPassword ? errors.repeatPassword.message : null
                   }
-                  SelectProps={{
-                    native: true
-                  }}
                   InputLabelProps={{
                     shrink: true
+                  }}
+                  FormHelperTextProps={{
+                    sx: {
+                      fontSize: "0.75rem",
+                      margin: 0
+                    }
                   }}
                   sx={{
                     width: "100%",
@@ -344,15 +377,14 @@ const SignInForm = () => {
               display: "flex",
               height: "2rem",
               padding: "0rem 0.625rem",
-              gap: { xs: 2, md: 15 },
               alignItems: "center",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 1, md: 2 }
+              marginBottom: { xs: 1, md: 1 }
             }}
           >
             <Link
-              href="/signup"
+              href="/sigin"
               sx={{
                 color: "rgba(30, 188, 223, 1)",
                 fontFeatureSettings: "'clig' off, 'liga' off",
@@ -373,7 +405,7 @@ const SignInForm = () => {
               height: "2rem"
             }}
           >
-            Sign in
+            Sign up
           </Button>
         </Box>
       </Box>

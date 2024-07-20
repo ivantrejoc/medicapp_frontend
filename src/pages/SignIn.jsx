@@ -1,12 +1,22 @@
+import { useEffect } from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { SignInForm } from "../components/SigInForm";
 import calendarDoctor from "/img/doctor-calendar.png";
+import { getPatients } from "../services/userService";
 
 const SignIn = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      await getPatients();
+    };
+    fetchPatients();
+  }, []);
+  
 
   return (
     <Box
@@ -24,7 +34,7 @@ const SignIn = () => {
     >
       {isMobile || isTablet ? (
         <Box
-          class="wrapper"
+          className="wrapper"
           sx={{
             display: "flex",
             width: "100%",
@@ -32,14 +42,14 @@ const SignIn = () => {
           }}
         >
           <Box
-            class="screen-wrapper"
+            className="screen-wrapper"
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "center",
-              paddingY: { xs: 5, sm: 12 },
-              gap: {xs:2, md:5},
+              paddingY: 5,
+              gap: 6,
               background:
                 "linear-gradient(180deg, #6CF5B3 0%, #9DEDC6 81.32%, #6CF5E0 100%)",
               height: "100%",
@@ -51,8 +61,8 @@ const SignIn = () => {
               variant="h1"
               sx={{
                 display: "flex",
-                width: {xs: "18.875rem", md: "42.875rem"},
-                height: "6.625rem",
+                width: { xs: "18.875rem", md: "42.875rem" },
+                height: { xs: "3.625rem", md: "6.625rem" },
                 marginLeft: 18,
                 flexDirection: "column",
                 justifyContent: "center",
@@ -68,21 +78,21 @@ const SignIn = () => {
         </Box>
       ) : (
         <Box
-          class="wrapper"
+          className="wrapper"
           sx={{
             display: "flex",
             width: "100%",
-            height: "100vh"
+            height: "100%"
           }}
         >
           <Box
-            class="left-side"
+            className="left-side"
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: 5,
+              gap: { lg: 0.5, xxl: 5 },
               background:
                 "linear-gradient(180deg, #6CF5B3 0%, #9DEDC6 81.32%, #6CF5E0 100%)",
               height: "100%",
@@ -106,10 +116,10 @@ const SignIn = () => {
               Welcome to your medical appointment manager
             </Typography>
             <Box
-              class="image"
+              className="image"
               sx={{
-                width: "35.875rem",
-                height: "35.875rem",
+                width: { lg: "30.875rem", xxl: "35.875rem" },
+                height: { lg: "30.875rem", xxl: "35.875rem" },
                 marginLeft: 15,
                 flexShrink: 0,
                 boxSizing: "border-box",
@@ -118,7 +128,7 @@ const SignIn = () => {
             ></Box>
           </Box>
           <Box
-            class="right-side"
+            className="right-side"
             sx={{
               display: "flex",
               flexDirection: "column",

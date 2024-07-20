@@ -16,9 +16,9 @@ const Appointments = () => {
         overflow: "hidden"
       }}
     >
-    <PatientAppointments />
+      <PatientAppointments />
     </Box>
-  )
+  );
 };
 
-export default Appointments
+export default Appointments;
