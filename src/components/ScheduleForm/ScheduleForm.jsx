@@ -15,10 +15,13 @@ import BasicData from "../BasicData/BasicData";
 import { createAppointment, getMedics } from "../../services";
 import { getSpecialties } from "../../services";
 import dayjs from "dayjs";
+import AlertModal from "../AlertModal/AlertModal";
 
 const ScheduleForm = () => {
   const [medics, setMedics] = useState([]);
   const [specialties, setSpecialties] = useState([]);
+  const [message, setMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
@@ -41,7 +44,8 @@ const ScheduleForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     defaultValues: {
       patientId: "",
@@ -93,7 +97,9 @@ const ScheduleForm = () => {
 
     const response = await createAppointment(appointmentData);
     const responseMessage = await response.body.message;
-    alert(responseMessage);
+    reset();
+    setMessage(responseMessage);
+    setOpenAlert(true);
   };
 
   return (
@@ -112,6 +118,13 @@ const ScheduleForm = () => {
         boxSizing: "border-box"
       }}
     >
+      {openAlert && (
+        <AlertModal
+          open={openAlert}
+          message={message}
+          onClose={() => setOpenAlert(false)}
+        />
+      )}
       {(isMobile || isTablet) && <BasicData />}
       <Box
         className="form"
@@ -191,14 +204,7 @@ const ScheduleForm = () => {
                   variant="outlined"
                   label="Specialism"
                   placeholder="Select specialism"
-                  error={!!errors.specialism}
-                  onChange={(event) => {
-                    field.onChange(event);
-                    control.setValue(
-                      "specialismId",
-                      event.target.options[event.target.selectedIndex].id
-                    );
-                  }}
+                  error={!!errors.specialism}                  
                   helperText={
                     errors.specialism ? errors.specialism.message : null
                   }
