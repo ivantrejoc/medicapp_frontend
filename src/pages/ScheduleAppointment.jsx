@@ -1,7 +1,6 @@
 import { Box } from "@mui/material";
 import { ScheduleForm } from "../components/ScheduleForm";
 
-
 const ScheduleAppointment = () => {
   // const id = 2;
   // useEffect(() => {
@@ -28,7 +27,8 @@ const ScheduleAppointment = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden"
+        overflowX: "hidden",
+        overflowY: { xs: "visible", md: "hidden" }
       }}
     >
       <ScheduleForm />
