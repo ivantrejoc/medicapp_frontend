@@ -20,11 +20,12 @@ import BasicData from "../BasicData/BasicData";
 import Pagination from "../Pagination/Pagination";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
-import { getAppointmentsById } from "../../services/appointmentsServices";
+// import { getAppointmentsById } from "../../services/appointmentsServices";
+import { useAppointmentsStore } from "../../store/appointmentsStore";
 
 const PatientAppointments = () => {
   const theme = useTheme();
-  const [appointments, setAppointments] = useState([]);
+  // const [appointments, setAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
@@ -32,30 +33,32 @@ const PatientAppointments = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
+  const { appointmentsById, fetchAppointmentsById } = useAppointmentsStore(
+    (state) => ({
+      appointmentsById: state.appointmentsById,
+      fetchAppointmentsById: state.fetchAppointmentsById
+    })
+  );
+
   useEffect(() => {
     const id = 2;
-    const fetchAppointmentsById = async (id) => {
-      const response = await getAppointmentsById(id);
-      setAppointments(response);
-      setLoading(false);
-    };
-
     fetchAppointmentsById(id);
+    setLoading(false);
   }, []);
+
+  const appointments = appointmentsById;
 
   const indexOfLastAppointment = currentPage * pageSize;
   const indexOfFirstAppointment = indexOfLastAppointment - pageSize;
 
-  const currentAppointments =
-    Array.isArray(appointments) && appointments.length > 0
-      ? appointments.slice(indexOfFirstAppointment, indexOfLastAppointment)
-      : [];
+  const currentAppointments = appointments?.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
 
   const pagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
-  // console.log("LOS CURRENT: ", currentAppointments);
 
   if (loading) {
     return <p>LOADING...</p>;
