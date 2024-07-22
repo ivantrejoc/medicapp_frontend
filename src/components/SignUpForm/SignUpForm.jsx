@@ -17,7 +17,8 @@ const SignInForm = () => {
     handleSubmit,
     control,
     getValues,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     defaultValues: {
       name: "",
@@ -41,6 +42,7 @@ const SignInForm = () => {
     };
     const response = await createPatient(patientData);
     const responseMessage = response.body.message;
+    reset();
     alert(responseMessage);
   };
 

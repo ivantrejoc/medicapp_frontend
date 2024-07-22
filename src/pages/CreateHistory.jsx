@@ -14,7 +14,8 @@ const CreateHistory = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden"
+        overflow:{md: "hidden"},
+        overflowY: { xs: "auto", md: "hidden" }
       }}
     >
       <HistoryForm />
