@@ -10,7 +10,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "../PhoneInput/PhoneInput";
 import medicappLogo from "/img/medicapp-logo.png";
-import { createPatient } from "../../services/userService";
+import { createPatient } from "../../services/userServices";
 
 const SignInForm = () => {
   const {

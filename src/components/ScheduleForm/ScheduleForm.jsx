@@ -12,34 +12,30 @@ import { useTheme } from "@mui/material/styles";
 import { useForm, Controller } from "react-hook-form";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import BasicData from "../BasicData/BasicData";
-import { createAppointment, getMedics } from "../../services";
-import { getSpecialties } from "../../services";
+import { createAppointment } from "../../services";
+import { useSpecialtiesState } from "../../store/specialtiesState";
 import dayjs from "dayjs";
 import AlertModal from "../AlertModal/AlertModal";
 
 const ScheduleForm = () => {
-  const [medics, setMedics] = useState([]);
-  const [specialties, setSpecialties] = useState([]);
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
+  const { fetchSpecialties, fetchMedics, specialties, medics } =
+    useSpecialtiesState((state) => ({
+      specialties: state.specialties,
+      medics: state.medics,
+      fetchMedics: state.fetchMedics,
+      fetchSpecialties: state.fetchSpecialties
+    }));
+
   useEffect(() => {
-    const fetchMedics = async () => {
-      const response = await getMedics();
-      setMedics(response);
-    };
-
-    const fetchSpecialties = async () => {
-      const response = await getSpecialties();
-      setSpecialties(response);
-    };
-
-    fetchMedics();
     fetchSpecialties();
-  }, []);
+    fetchMedics();
+  }, []);  
 
   const {
     control,
@@ -204,7 +200,7 @@ const ScheduleForm = () => {
                   variant="outlined"
                   label="Specialism"
                   placeholder="Select specialism"
-                  error={!!errors.specialism}                  
+                  error={!!errors.specialism}
                   helperText={
                     errors.specialism ? errors.specialism.message : null
                   }

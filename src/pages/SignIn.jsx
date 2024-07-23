@@ -1,22 +1,12 @@
-import { useEffect } from "react";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { SignInForm } from "../components/SigInForm";
 import calendarDoctor from "/img/doctor-calendar.png";
-import { getPatients } from "../services/userService";
 
 const SignIn = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
-
-  useEffect(() => {
-    const fetchPatients = async () => {
-      await getPatients();
-    };
-    fetchPatients();
-  }, []);
-  
 
   return (
     <Box

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Paper,
   Box,
@@ -8,17 +9,28 @@ import {
   Link,
   useMediaQuery
 } from "@mui/material";
+import AlertModal from "../AlertModal/AlertModal";
 import { useTheme } from "@mui/material/styles";
 import { useForm, Controller } from "react-hook-form";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import medicappLogo from "/img/medicapp-logo.png";
 
 const SignInForm = () => {
+  const [message, setMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const { login, currentUser } = useAuth();
+  console.log("EL CURRENT USER: ", currentUser);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
     control,
+    reset,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -27,8 +39,25 @@ const SignInForm = () => {
     }
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/appointments/schedule");
+    }
+  }, [currentUser, navigate]);
+
+  const onSubmit = async (data) => {
+    try {
+      const response = await login(data);
+      const status = response.status;
+      if (status === false) {
+        setMessage(response.data);
+        setOpenAlert(true);
+      }
+      reset();
+    } catch (error) {
+      console.error;
+    }
   };
 
   return (
@@ -47,6 +76,13 @@ const SignInForm = () => {
         boxSizing: "border-box"
       }}
     >
+      {openAlert && (
+        <AlertModal
+          open={openAlert}
+          message={message}
+          onClose={() => setOpenAlert(false)}
+        />
+      )}
       <Box
         className="logo-wrapper"
         sx={{

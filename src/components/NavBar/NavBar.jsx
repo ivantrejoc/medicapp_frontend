@@ -1,11 +1,7 @@
-import {
-  Paper,
-  AppBar,
-  Toolbar,
-  Box,
-  Button  
-} from "@mui/material";
+import { Paper, AppBar, Toolbar, Box, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -13,6 +9,13 @@ const NavBar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    await logout();
+    navigate("/");
+  };
 
   return (
     <Paper
@@ -81,6 +84,9 @@ const NavBar = () => {
               size="medium"
               startIcon={<LogoutIcon />}
               variant="contained"
+              onClick={() => {
+                handleClick();
+              }}
               sx={{
                 width: { lg: "11rem" }
               }}
@@ -88,16 +94,6 @@ const NavBar = () => {
               Sign out
             </Button>
           )}
-          {/* <Button
-            size="medium"
-            startIcon={<LogoutIcon />}
-            variant="contained"
-            sx={{
-              width: { lg: "11rem" }
-            }}
-          >
-            Sign out
-          </Button> */}
         </Toolbar>
       </AppBar>
     </Paper>
