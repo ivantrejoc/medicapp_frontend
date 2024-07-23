@@ -7,11 +7,13 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
+  const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem("isAuth")) || false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  }, [currentUser]);
+    localStorage.setItem("isAuth", JSON.stringify(currentUser));
+  }, [currentUser, isAuth]);
 
   const login = async (userData) => {
     try {
@@ -20,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       const user = userCredential.data;
       if (status === true) {
         setCurrentUser(user);
+        setIsAuth(true);
         return userCredential;
       } else {
         throw new Error(userCredential.data);
@@ -33,13 +36,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  console.log("isAuth en Context despues de login:", isAuth);
+
   const logout = () => {
     setCurrentUser(null);
+    setIsAuth(false);
     localStorage.removeItem("currentUser");
+    localStorage.removeItem("isAuth");
   };
 
   const value = {
     currentUser,
+    isAuth,
     login,
     logout,
     error

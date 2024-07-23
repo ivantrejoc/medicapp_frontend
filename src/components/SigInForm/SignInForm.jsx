@@ -19,12 +19,9 @@ import medicappLogo from "/img/medicapp-logo.png";
 const SignInForm = () => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
-
-  const { login, currentUser } = useAuth();
-  console.log("EL CURRENT USER: ", currentUser);
+  const { login, isAuth } = useAuth();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const navigate = useNavigate();
 
   const {
@@ -39,18 +36,20 @@ const SignInForm = () => {
     }
   });
 
-
   useEffect(() => {
-    if (currentUser) {
+    if (isAuth) {
       navigate("/appointments/schedule");
     }
-  }, [currentUser, navigate]);
+  }, [isAuth, navigate]);
+  console.log("isAuth en el form: ", isAuth);
 
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
       const status = response.status;
-      if (status === false) {
+      if (status === true) {
+        navigate("/appointments/schedule");
+      } else {
         setMessage(response.data);
         setOpenAlert(true);
       }

@@ -12,8 +12,8 @@ const NavBar = () => {
 
   const { logout } = useAuth();
   const navigate = useNavigate();
-  const handleClick = async () => {
-    await logout();
+  const handleClick = () => {
+    logout();
     navigate("/");
   };
 

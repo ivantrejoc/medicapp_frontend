@@ -1,15 +1,22 @@
 import { Button, Menu, MenuItem, Fade, Link } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const BurgerMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const { logout } = useAuth();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
   };
 
   return (
@@ -48,9 +55,7 @@ const BurgerMenu = () => {
         <MenuItem onClick={handleClose}>
           <Link href="/history">My medical history</Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Link href="/">Sign out</Link>
-        </MenuItem>
+        <MenuItem onClick={handleLogout}>Sign out</MenuItem>
       </Menu>
     </div>
   );
