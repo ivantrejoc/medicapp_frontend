@@ -20,6 +20,7 @@ import BasicData from "../BasicData/BasicData";
 import Pagination from "../Pagination/Pagination";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
+import Loading from "../Loading/Loading";
 import { useAppointmentsStore } from "../../store/appointmentsStore";
 
 const PatientAppointments = ({ user }) => {
@@ -58,7 +59,7 @@ const PatientAppointments = ({ user }) => {
   };
 
   if (loading) {
-    return <p>LOADING...</p>;
+    return <Loading/>;
   }
 
   return (
