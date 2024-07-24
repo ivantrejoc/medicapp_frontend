@@ -7,7 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("currentUser")) || null
   );
-  const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem("isAuth")) || false);
+  const [isAuth, setIsAuth] = useState(
+    JSON.parse(localStorage.getItem("isAuth")) || false
+  );
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -35,8 +37,6 @@ export const AuthProvider = ({ children }) => {
       };
     }
   };
-
-  console.log("isAuth en Context despues de login:", isAuth);
 
   const logout = () => {
     setCurrentUser(null);

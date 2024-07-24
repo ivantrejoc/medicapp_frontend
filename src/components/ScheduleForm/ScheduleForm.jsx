@@ -17,7 +17,7 @@ import { useSpecialtiesState } from "../../store/specialtiesState";
 import dayjs from "dayjs";
 import AlertModal from "../AlertModal/AlertModal";
 
-const ScheduleForm = () => {
+const ScheduleForm = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
   const theme = useTheme();
@@ -35,7 +35,7 @@ const ScheduleForm = () => {
   useEffect(() => {
     fetchSpecialties();
     fetchMedics();
-  }, []);  
+  }, []);
 
   const {
     control,
@@ -56,16 +56,13 @@ const ScheduleForm = () => {
     }
   });
 
+  const userId = user?.id;
+  const userName = user?.name;
+  const userLastName = user?.lastName;
+
   const onSubmit = async (data) => {
-    const {
-      // patientId,
-      // patient,
-      medic,
-      specialism,
-      appointmentDate,
-      appointmentHour,
-      comments
-    } = data;
+    const { medic, specialism, appointmentDate, appointmentHour, comments } =
+      data;
 
     const selectedSpecialism = specialties.find((s) => s.name === specialism);
     const specialismId = selectedSpecialism ? selectedSpecialism.id : null;
@@ -80,13 +77,13 @@ const ScheduleForm = () => {
     const cleanHour = appointmentHour.format("HH:mm:ss");
 
     const appointmentData = {
-      patient_id: 1,
+      patient_id: userId,
       medic_id: medicId,
       specialism_id: specialismId,
       appointment_date: cleanDate,
       appointment_hour: cleanHour,
       comments: comments,
-      patient_name: "John Doe",
+      patient_name: `${userName} ${userLastName}`,
       medic_name: medic,
       specialism: specialism
     };
@@ -121,7 +118,9 @@ const ScheduleForm = () => {
           onClose={() => setOpenAlert(false)}
         />
       )}
-      {(isMobile || isTablet) && <BasicData />}
+      {(isMobile || isTablet) && (
+        <BasicData name={user.name} lastName={user.lastName} />
+      )}
       <Box
         className="form"
         sx={{

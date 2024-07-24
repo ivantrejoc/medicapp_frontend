@@ -1,20 +1,22 @@
+import { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import { ScheduleForm } from "../components/ScheduleForm";
 
 const ScheduleAppointment = () => {
-  // const id = 2;
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await getUserById(id);
-  //       console.log(response);
-  //       return(response);
-  //     } catch (error) {
-  //       console.error("Error fetching user:", error);
-  //     }
-  //   };
-  //   fetchUser();
-  // }, [id]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {      
+      setUser(JSON.parse(storedUser));
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <Box
@@ -31,7 +33,7 @@ const ScheduleAppointment = () => {
         overflowY: { xs: "visible", md: "hidden" }
       }}
     >
-      <ScheduleForm />
+      <ScheduleForm user={user} />
     </Box>
   );
 };

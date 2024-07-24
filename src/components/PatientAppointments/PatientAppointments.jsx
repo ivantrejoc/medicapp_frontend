@@ -20,16 +20,14 @@ import BasicData from "../BasicData/BasicData";
 import Pagination from "../Pagination/Pagination";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
-// import { getAppointmentsById } from "../../services/appointmentsServices";
 import { useAppointmentsStore } from "../../store/appointmentsStore";
 
-const PatientAppointments = () => {
-  const theme = useTheme();
-  // const [appointments, setAppointments] = useState([]);
+const PatientAppointments = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
-
+  const { id, name, lastName } = user;
+  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
 
@@ -41,10 +39,9 @@ const PatientAppointments = () => {
   );
 
   useEffect(() => {
-    const id = 2;
     fetchAppointmentsById(id);
     setLoading(false);
-  }, []);
+  }, [id, setLoading, fetchAppointmentsById]);
 
   const appointments = appointmentsById;
 
@@ -84,7 +81,7 @@ const PatientAppointments = () => {
         boxSizing: "border-box"
       }}
     >
-      {(isMobile || isTablet) && <BasicData />}
+      {(isMobile || isTablet) && <BasicData name={name} lastName={lastName} />}
       <Box
         className="dashboard-wrapper"
         sx={{

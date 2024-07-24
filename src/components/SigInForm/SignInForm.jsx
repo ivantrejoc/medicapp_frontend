@@ -47,9 +47,7 @@ const SignInForm = () => {
     try {
       const response = await login(data);
       const status = response.status;
-      if (status === true) {
-        navigate("/appointments/schedule");
-      } else {
+      if(status === false) {
         setMessage(response.data);
         setOpenAlert(true);
       }

@@ -1,20 +1,24 @@
 import { Box, Typography } from "@mui/material";
 
-const BasicData = () => {
+const BasicData = ({ name, lastName }) => {
   return (
     <Box
-      sx={{        
+      sx={{
         display: "flex",
         width: "100%",
         height: "2rem",
-        padding: {xs:"var(--1, 0.25rem) var(--none, 1.5rem)", md:"0.25rem 1.5rem" },
-        alignItems: "flex-start",        
+        padding: {
+          xs: "var(--1, 0.25rem) var(--none, 1.5rem)",
+          md: "0.25rem 1.5rem"
+        },
+        alignItems: "flex-start",
         boxSizing: "border-box",
         marginBottom: 0
       }}
     >
-      <Typography variant="avatarName">Patient: Jhon Doe </Typography>
-      
+      <Typography variant="avatarName">
+        Patient: {name} {lastName}{" "}
+      </Typography>
     </Box>
   );
 };

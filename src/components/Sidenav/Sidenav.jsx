@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Drawer,
   List,
@@ -26,6 +26,15 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
   const [openAppointmens, setOpenAppointments] = useState(false);
   const [openMedicalHistory, setOpenMedicalHistory] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() =>{
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"))
+    if (storedUser){
+      setUser(storedUser)
+    }    
+  }, [])
+  
 
   const toggleDrawer = () => {
     setDrawerExpanded(!drawerExpanded);
@@ -226,7 +235,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
               boxSizing: "border-box"
             }}
           >
-            <Typography variant="avatarName">John Doe</Typography>
+            <Typography variant="avatarName">{user.name} {user.lastName}</Typography>
             <Typography variant="avatarRole">Patient</Typography>
           </Box>
         </Box>

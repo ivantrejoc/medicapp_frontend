@@ -10,37 +10,8 @@ import NotFound from "../pages/NotFound.jsx";
 
 const Router = () => {
   const { isAuth } = useAuth();
-    
-  return useRoutes([
-    // {
-    //   path: "/",
-    //   element: <SignIn />
-    // },
-    // {
-    //   path: "/signup",
-    //   element: <SignUp />
-    // },
-    // {
-    //   path: "/appointments",
-    //   element: <Appointments />
-    // },
-    // {
-    //   path: "/appointments",
-    //   element: <Appointments />
-    // },
-    // {
-    //   path: "/appointments/schedule",
-    //   element: <ScheduleAppointment />
-    // },
-    // {
-    //   path: "/history",
-    //   element: <History />
-    // },
-    // {
-    //   path: "/history/create",
-    //   element: <CreateHistory />
-    // }
 
+  return useRoutes([    
     {
       path: "/",
       element: <SignIn />

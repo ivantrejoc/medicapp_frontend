@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Paper,
   Box,
@@ -17,15 +18,14 @@ import { useTheme } from "@mui/material/styles";
 import BasicData from "../BasicData/BasicData";
 import AlertModal from "../AlertModal/AlertModal";
 import { createHistory } from "../../services/historyServices";
-import { useState } from "react";
 
-const HistoryForm = () => {
+const HistoryForm = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
-
+  
   const {
     handleSubmit,
     control,
@@ -46,6 +46,8 @@ const HistoryForm = () => {
     }
   });
 
+  const userId = user?.id;
+    
   const onSubmit = async (data) => {
     const formData = {
       ...data,
@@ -60,7 +62,7 @@ const HistoryForm = () => {
 
     const historyData = {
       ...formData,
-      patient_id: 7
+      patient_id: userId
     };
     const response = await createHistory(historyData);
     const responseMessage = await response.body.message;
@@ -92,7 +94,9 @@ const HistoryForm = () => {
           onClose={() => setOpenAlert(false)}
         />
       )}
-      {(isMobile || isTablet) && <BasicData />}
+      {(isMobile || isTablet) && (
+        <BasicData name={user?.name} lastName={user?.lastName} />
+      )}
       <Box
         className="form"
         sx={{
