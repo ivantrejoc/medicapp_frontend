@@ -18,7 +18,7 @@ const Loading = () => {
         overflowY: { xs: "auto", md: "hidden" }
       }}
     >
-      <div className="custom-loader"></div>
+      <div className="progress"></div>
     </Box>
   );
 };

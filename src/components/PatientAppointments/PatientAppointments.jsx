@@ -59,7 +59,7 @@ const PatientAppointments = ({ user }) => {
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (

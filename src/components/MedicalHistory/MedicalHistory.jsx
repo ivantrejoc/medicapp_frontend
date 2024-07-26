@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Paper,
   Box,
@@ -7,7 +8,9 @@ import {
   useMediaQuery
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { useStories } from "../../store/storiesState";
 import BasicData from "../BasicData/BasicData";
+import Loading from "../Loading/Loading";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import DisplayData from "../DisplayData/DisplayData";
@@ -15,23 +18,29 @@ import DisplayDataMulti from "../DisplayData/DisplayDataMulti";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const MedicalHistory = () => {
-  const riskFactors = {
-    age: "25",
-    height: "178 cm",
-    weight: "152 lbs",
-    bmi: "13.75",
-    smoking: "yes",
-    alcohol: "yes",
-    drugs: "no",
-    hypertension: "no",
-    medication: "yes",
-    comorbilities: "Left knee injury."
-  };
-
+const MedicalHistory = ({ user }) => {
+  const [loading, setLoading] = useState(true);
+  const { id } = user;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  const { fetchStoryById, historyById } = useStories((state) => ({
+    historyById: state.historyById,
+    fetchStoryById: state.fetchStoryById
+  }));
+
+  useEffect(() => {
+    const loadStoryById = async (id) => {
+      await fetchStoryById(id);
+      setLoading(false);
+    };
+    loadStoryById(id);
+  }, [id, fetchStoryById]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Paper
@@ -112,10 +121,10 @@ const MedicalHistory = () => {
               marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
-            <DisplayData label={"Age"} value={riskFactors.age} />
-            <DisplayData label={"Height"} value={riskFactors.height} />
-            <DisplayData label={"Weight"} value={riskFactors.weight} />
-            <DisplayData label={"BMI"} value={riskFactors.bmi} />
+            <DisplayData label={"Age"} value={historyById.age} />
+            <DisplayData label={"Height"} value={historyById.height} />
+            <DisplayData label={"Weight"} value={historyById.weight} />
+            <DisplayData label={"BMI"} value={historyById.bmi} />
           </Box>
           <Box
             id="row-2"
@@ -141,7 +150,7 @@ const MedicalHistory = () => {
                 boxSizing: "border-box"
               }}
             >
-              {riskFactors.smoking === "yes" ? (
+              {historyById.smoking === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -179,7 +188,7 @@ const MedicalHistory = () => {
                 boxSizing: "border-box"
               }}
             >
-              {riskFactors.drugs === "yes" ? (
+              {historyById.drugs === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -217,7 +226,7 @@ const MedicalHistory = () => {
                 boxSizing: "border-box"
               }}
             >
-              {riskFactors.hypertension === "yes" ? (
+              {historyById.hypertension === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -255,7 +264,7 @@ const MedicalHistory = () => {
                 boxSizing: "border-box"
               }}
             >
-              {riskFactors.medication === "yes" ? (
+              {historyById.medication === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -293,7 +302,7 @@ const MedicalHistory = () => {
                 boxSizing: "border-box"
               }}
             >
-              {riskFactors.alcohol === "yes" ? (
+              {historyById.alcohol === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -334,7 +343,7 @@ const MedicalHistory = () => {
           >
             <DisplayDataMulti
               label={"Comorbilities"}
-              value={riskFactors.comorbilities}
+              value={historyById.comorbilities}
             />
           </Box>
           <Box
@@ -353,7 +362,6 @@ const MedicalHistory = () => {
               size="small"
               startIcon={<EditIcon />}
               sx={{
-                // height
                 paddingX: 1,
                 background: "#EBAE42",
                 textTransform: "uppercase",
@@ -363,7 +371,7 @@ const MedicalHistory = () => {
                 }
               }}
             >
-              Edit 
+              Edit
             </Button>
             <Button
               size="small"
@@ -378,7 +386,7 @@ const MedicalHistory = () => {
                 }
               }}
             >
-              Delete 
+              Delete
             </Button>
           </Box>
         </Box>

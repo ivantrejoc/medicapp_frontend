@@ -1,20 +1,24 @@
-.custom-loader {
-    --d:44px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    color: #57F7BE;
-    box-shadow: 
-      calc(1*var(--d))      calc(0*var(--d))     0 0,
-      calc(0.707*var(--d))  calc(0.707*var(--d)) 0 2px,
-      calc(0*var(--d))      calc(1*var(--d))     0 4px,
-      calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 6px,
-      calc(-1*var(--d))     calc(0*var(--d))     0 8px,
-      calc(-0.707*var(--d)) calc(-0.707*var(--d))0 10px,
-      calc(0*var(--d))      calc(-1*var(--d))    0 12px;
-    animation: s7 1s infinite steps(8);
+.progress {
+  width: 200px;
+  height: 24.6px;
+  border-radius: 22.4px;
+  color: #57f7be;
+  border: 2.2px solid;
+  position: relative;
+}
+
+.progress::before {
+  content: "";
+  position: absolute;
+  margin: 2.2px;
+  inset: 0 100% 0 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: progress-pf82op 2s infinite;
+}
+
+@keyframes progress-pf82op {
+  100% {
+    inset: 0;
   }
-  
-  @keyframes s7 {
-    100% {transform: rotate(1turn)}
-  }
+}
