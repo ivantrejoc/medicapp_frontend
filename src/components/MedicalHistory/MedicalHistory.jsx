@@ -322,7 +322,7 @@ const MedicalHistory = ({ user }) => {
                   fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: "400",
-                  lineHeight: "150%" /* 1.5rem */,
+                  lineHeight: "150%",
                   letterSpacing: "0.00938rem"
                 }}
               >
@@ -361,6 +361,7 @@ const MedicalHistory = ({ user }) => {
             <Button
               size="small"
               startIcon={<EditIcon />}
+              href={"/history/edit"}
               sx={{
                 paddingX: 1,
                 background: "#EBAE42",
