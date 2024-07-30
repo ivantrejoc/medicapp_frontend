@@ -26,8 +26,8 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
   const [openAppointmens, setOpenAppointments] = useState(false);
   const [openMedicalHistory, setOpenMedicalHistory] = useState(false);
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState(null);  
+  
   useEffect(() =>{
     const storedUser = JSON.parse(localStorage.getItem("currentUser"))
     if (storedUser){
@@ -63,20 +63,22 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         zIndex: 1200,
         "& .MuiDrawer-paper": {
           width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
-          boxSizing: "border-box",
-          background: "#E2E2E2",
           display: "flex",
+          flexDirection: "column",
+          boxSizing: "border-box",
+          background: "#E2E2E2",          
           alignItems: "center",
-          gap: {lg: 30, xl: 40 }
+          justifyContent: "space-between",         
         }
       }}
     >
       <Box
-        sx={{
+        sx={{          
           width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
           maxWidth: "14rem",
-          height: "25rem",
-          marginTop: 10
+          height: "24.5rem",
+          marginTop: 9.5,
+          overflow: "hidden"
         }}
         component="nav"
       >
@@ -106,7 +108,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         )}
         {drawerExpanded ? (
           <Collapse in={openAppointmens} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
+            <List sx={{height: "7rem"}} component="div" disablePadding>
               <ListItemButton href="/appointments/schedule" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <EditCalendarIcon />
@@ -161,7 +163,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         )}
         {drawerExpanded ? (
           <Collapse in={openMedicalHistory} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
+            <List sx={{height: "8rem"}} component="div" disablePadding>
               <ListItemButton href="/history/create" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <HistoryEduIcon />
