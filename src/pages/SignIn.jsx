@@ -95,7 +95,6 @@ const SignIn = () => {
                 display: "flex",
                 width: "42.875rem",
                 height: "6.625rem",
-                marginLeft: 18,
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
@@ -110,7 +109,6 @@ const SignIn = () => {
               sx={{
                 width: { lg: "30.875rem", xxl: "35.875rem" },
                 height: { lg: "30.875rem", xxl: "35.875rem" },
-                marginLeft: 15,
                 flexShrink: 0,
                 boxSizing: "border-box",
                 background: `url(${calendarDoctor}) 100%/ cover no-repeat`

@@ -13,34 +13,6 @@ const Router = () => {
   const { isAuth } = useAuth();
 
   return useRoutes([
-    // {
-    //   path: "/",
-    //   element: <SignIn />
-    // },
-    // {
-    //   path: "/signup",
-    //   element: <SignUp />
-    // },
-    // {
-    //   path: "/appointments",
-    //   element: isAuth ? <Appointments /> : <Navigate to="/" />
-    // },
-    // {
-    //   path: "/appointments/schedule",
-    //   element: isAuth ? <ScheduleAppointment /> : <Navigate to="/" />
-    // },
-    // {
-    //   path: "/history",
-    //   element: isAuth ? <History /> : <Navigate to="/" />
-    // },
-    // {
-    //   path: "/history/create",
-    //   element: isAuth ? <CreateHistory /> : <Navigate to="/" />
-    // },
-    // {
-    //   path: "*",
-    //   element: <NotFound />
-    // }
     {
       path: "/",
       element: <SignIn />
@@ -51,23 +23,23 @@ const Router = () => {
     },
     {
       path: "/appointments",
-      element: <Appointments />
+      element: isAuth ? <Appointments /> : <Navigate to="/" />
     },
     {
       path: "/appointments/schedule",
-      element: <ScheduleAppointment />
+      element: isAuth ? <ScheduleAppointment /> : <Navigate to="/" />
     },
     {
       path: "/history",
-      element: <History />
+      element: isAuth ? <History /> : <Navigate to="/" />
     },
     {
       path: "/history/create",
-      element: <CreateHistory />
+      element: isAuth ? <CreateHistory /> : <Navigate to="/" />
     },
     {
       path: "/history/edit",
-      element: <EditHistory />
+      element: isAuth ? <EditHistory /> : <Navigate to="/" />
     },
     {
       path: "*",

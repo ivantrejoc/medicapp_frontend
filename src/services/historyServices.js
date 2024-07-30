@@ -35,3 +35,17 @@ export const editHistory = async (historyData) => {
     return error.message;
   }
 };
+
+export const deleteHistory = async (id, patientId) => {
+  try {
+    const response = await axios.delete(
+      `${URL}/history?id=${id}&patient_id=${patientId}`
+    );
+    if (response.status === 200) {
+      console.log("RESPUESTA DE SERVICE:", response.data);
+      return response.data;
+    }
+  } catch (error) {
+    return error.message;
+  }
+};

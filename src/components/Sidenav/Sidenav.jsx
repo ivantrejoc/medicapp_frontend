@@ -67,7 +67,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
           background: "#E2E2E2",
           display: "flex",
           alignItems: "center",
-          gap: { xs: 30, sm: 57, md: 40, lg: 30 }
+          gap: {lg: 30, xl: 40 }
         }
       }}
     >

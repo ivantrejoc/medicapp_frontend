@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useStories } from "../../store/storiesState";
+import { useNavigate } from "react-router-dom";
+import { deleteHistory } from "../../services/historyServices";
 import BasicData from "../BasicData/BasicData";
 import Loading from "../Loading/Loading";
+import AlertModal from "../AlertModal/AlertModal";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import DisplayData from "../DisplayData/DisplayData";
@@ -20,10 +23,16 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const MedicalHistory = ({ user }) => {
   const [loading, setLoading] = useState(true);
-  const { id } = user;
+  const [message, setMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const { id, name, lastName } = user;
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  const navigate = useNavigate();
 
   const { fetchStoryById, historyById } = useStories((state) => ({
     historyById: state.historyById,
@@ -37,6 +46,28 @@ const MedicalHistory = ({ user }) => {
     };
     loadStoryById(id);
   }, [id, fetchStoryById]);
+
+  const deleteHandler = async (id, patientId) => {
+    try {
+      const response = await deleteHistory(id, patientId);
+      if (response.statusCode === 200) {
+        console.log(response);
+        setOpenAlert(true);
+        setMessage(response.body.message);
+      }
+    } catch (error) {
+      console.error(error.message);
+      setOpenAlert(true);
+      setMessage(error.message);
+    }
+  };
+
+ const onClose = () => {
+    setOpenAlert(false);
+    setMessage(null);
+    navigate("/history/create")
+  };
+ 
 
   if (loading) {
     return <Loading />;
@@ -58,7 +89,14 @@ const MedicalHistory = ({ user }) => {
         boxSizing: "border-box"
       }}
     >
-      {(isMobile || isTablet) && <BasicData />}
+      {openAlert && (
+        <AlertModal
+          open={openAlert}
+          message={message}
+          onClose={onClose}
+        />
+      )}
+      {(isMobile || isTablet) && <BasicData name={name} lastName={lastName} />}
       <Box
         id="form"
         sx={{
@@ -377,6 +415,9 @@ const MedicalHistory = ({ user }) => {
             <Button
               size="small"
               startIcon={<DeleteIcon />}
+              onClick={() =>
+                deleteHandler(historyById.id, historyById.patient_id)
+              }
               sx={{
                 paddingX: 1,
                 background: "#FA7670",

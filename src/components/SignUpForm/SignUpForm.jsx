@@ -230,10 +230,10 @@ const SignInForm = () => {
               name="surname"
               control={control}
               rules={{
-                required: "Surname is required",
+                required: "Last name is required",
                 pattern: {
                   value: /^[a-zA-Z]+$/,
-                  message: "Surname not valid"
+                  message: "Last name not valid"
                 }
               }}
               render={({ field }) => (
@@ -242,7 +242,7 @@ const SignInForm = () => {
                   size="small"
                   variant="outlined"
                   type="text"
-                  label="Surname"
+                  label="Last name"
                   placeholder="Doe"
                   error={!!errors.surname}
                   helperText={errors.surname ? errors.surname.message : null}
@@ -386,7 +386,7 @@ const SignInForm = () => {
             }}
           >
             <Link
-              href="/sigin"
+              href="/"
               sx={{
                 color: "rgba(30, 188, 223, 1)",
                 fontFeatureSettings: "'clig' off, 'liga' off",

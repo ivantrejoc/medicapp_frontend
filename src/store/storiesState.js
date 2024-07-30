@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { editHistory, getStories } from "../services/historyServices";
+import { getStories } from "../services/historyServices";
 
 export const useStories = create((set, get) => ({
   stories: [],

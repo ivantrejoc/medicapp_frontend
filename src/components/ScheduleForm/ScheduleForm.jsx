@@ -16,13 +16,17 @@ import { createAppointment } from "../../services";
 import { useSpecialtiesState } from "../../store/specialtiesState";
 import dayjs from "dayjs";
 import AlertModal from "../AlertModal/AlertModal";
+import { useNavigate } from "react-router-dom";
 
 const ScheduleForm = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  const navigate = useNavigate();
 
   const { fetchSpecialties, fetchMedics, specialties, medics } =
     useSpecialtiesState((state) => ({
@@ -95,6 +99,11 @@ const ScheduleForm = ({ user }) => {
     setOpenAlert(true);
   };
 
+  const handleCloseAlert = () =>{
+    setOpenAlert(false);
+    navigate("/appointments");
+  }
+
   return (
     <Paper
       elevation={6}
@@ -115,7 +124,7 @@ const ScheduleForm = ({ user }) => {
         <AlertModal
           open={openAlert}
           message={message}
-          onClose={() => setOpenAlert(false)}
+          onClose={handleCloseAlert}
         />
       )}
       {(isMobile || isTablet) && (
