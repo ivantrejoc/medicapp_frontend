@@ -86,10 +86,10 @@ const SignInForm = () => {
       </Box>
       <Box
         className="form"
-        sx={{
+        sx={{          
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
-          height: { xs: "33.8rem", md: "39.2875rem" },
+          height: { xs: "37.8rem", md: "39.2875rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -125,9 +125,9 @@ const SignInForm = () => {
           className="inputs-wrapper"
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{
+          sx={{            
             display: "flex",
-            height: { xs: "28rem", md: "34.2rem" },
+            height: { xs: "33rem", md: "34.6rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -137,9 +137,10 @@ const SignInForm = () => {
         >
           <Box
             className="row-1"
-            sx={{
+            sx={{              
               display: "flex",
               flexDirection: "column",
+              height: { xs: "30rem", md: "32rem" },
               padding: "0.625rem",
               alignItems: "center",
               gap: "1rem",

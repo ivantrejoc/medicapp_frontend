@@ -98,6 +98,7 @@ const SignIn = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                marginLeft: 18,
                 flexShrink: 0,
                 boxSizing: "border-box"
               }}

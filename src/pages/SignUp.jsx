@@ -20,15 +20,14 @@ const SignIn = () => {
         alignItems: "center",
         justifyContent: "center",
         overflowX: "hidden",
-        overflowY: {xs:"visible", md:"hidden"}
+        overflowY: {xs:"visible", xxl:"hidden"}
 
       }}
     >
       {isMobile || isTablet ? (
         <Box
           className="wrapper"
-          sx={{
-            background: "red",
+          sx={{            
             display: "flex",
             width: "100%",
             height: "100%"

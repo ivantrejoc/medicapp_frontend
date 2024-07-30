@@ -23,28 +23,60 @@ const Router = () => {
     },
     {
       path: "/appointments",
-      element: isAuth ? <Appointments /> : <Navigate to="/" />
+      element:  <Appointments /> 
     },
     {
       path: "/appointments/schedule",
-      element: isAuth ? <ScheduleAppointment /> : <Navigate to="/" />
+      element:  <ScheduleAppointment /> 
     },
     {
       path: "/history",
-      element: isAuth ? <History /> : <Navigate to="/" />
+      element:  <History /> 
     },
     {
       path: "/history/create",
-      element: isAuth ? <CreateHistory /> : <Navigate to="/" />
+      element:  <CreateHistory /> 
     },
     {
       path: "/history/edit",
-      element: isAuth ? <EditHistory /> : <Navigate to="/" />
+      element:  <EditHistory /> 
     },
     {
       path: "*",
       element: <NotFound />
     }
+    // {
+    //   path: "/",
+    //   element: <SignIn />
+    // },
+    // {
+    //   path: "/signup",
+    //   element: <SignUp />
+    // },
+    // {
+    //   path: "/appointments",
+    //   element: isAuth ? <Appointments /> : <Navigate to="/" />
+    // },
+    // {
+    //   path: "/appointments/schedule",
+    //   element: isAuth ? <ScheduleAppointment /> : <Navigate to="/" />
+    // },
+    // {
+    //   path: "/history",
+    //   element: isAuth ? <History /> : <Navigate to="/" />
+    // },
+    // {
+    //   path: "/history/create",
+    //   element: isAuth ? <CreateHistory /> : <Navigate to="/" />
+    // },
+    // {
+    //   path: "/history/edit",
+    //   element: isAuth ? <EditHistory /> : <Navigate to="/" />
+    // },
+    // {
+    //   path: "*",
+    //   element: <NotFound />
+    // }
   ]);
 };
 export default Router;
