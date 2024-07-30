@@ -1,11 +1,40 @@
-
+import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import { ScheduleForm } from "../components/ScheduleForm";
 
 const ScheduleAppointment = () => {
-  return (
-    <div>
-        <h1>ESTA ES SCHEDULE APPOINTMENT</h1>
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    </div>
-  )
-}
-export default ScheduleAppointment
+  useEffect(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {      
+      setUser(JSON.parse(storedUser));
+      setLoading(false);
+    }
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <Box
+      sx={{
+        flexGrow: 1,
+        width: "100%",
+        height: "100%",
+        maxWidth: "100%",
+        maxHeight: { md: "100vh" },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflowX: "hidden",
+        overflowY: { xs: "visible", md: "hidden" }
+      }}
+    >
+      <ScheduleForm user={user} />
+    </Box>
+  );
+};
+export default ScheduleAppointment;
