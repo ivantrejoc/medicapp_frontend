@@ -25,7 +25,7 @@ const HistoryForm = ({ user }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
-  
+
   const {
     handleSubmit,
     control,
@@ -47,7 +47,7 @@ const HistoryForm = ({ user }) => {
   });
 
   const userId = user?.id;
-    
+
   const onSubmit = async (data) => {
     const formData = {
       ...data,
@@ -84,7 +84,8 @@ const HistoryForm = ({ user }) => {
         alignItems: "center",
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        marginTop: { md: 0 }
       }}
     >
       {openAlert && (
@@ -102,9 +103,10 @@ const HistoryForm = ({ user }) => {
         sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "37.1875rem" },
-          height: { xs: "31.3125rem", md: "29.0625rem" },
+          height: { xs: "31.925rem", md: "29.0625rem" },
           flexDirection: "column",
           alignItems: "flex-start",
+          justifyContent: "space-between",
           flexShrink: 0,
           boxSizing: "border-box"
         }}
@@ -140,7 +142,7 @@ const HistoryForm = ({ user }) => {
           onSubmit={handleSubmit(onSubmit)}
           sx={{
             display: "flex",
-            height: { xs: "28.2rem", md: "23.3rem" },
+            height: { xs: "27.5rem", md: "23.3rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -151,6 +153,7 @@ const HistoryForm = ({ user }) => {
           <Box
             className="row-1"
             sx={{
+              height: { xs: "11rem", md: "5rem" },
               display: { xs: "grid", md: "flex" },
               gridTemplateColumns: { xs: "repeat(2, 2fr)" },
               padding: { xs: "0rem", md: "0.625rem" },
@@ -340,7 +343,8 @@ const HistoryForm = ({ user }) => {
               flexDirection: { xs: "column", md: "row" },
               padding: { xs: "0", md: "0.625rem" },
               alignItems: "center",
-              gap: { xs: "1.75rem", md: "2.1875rem" },
+              height: { xs: "7rem", md: "2rem" },
+              gap: { xs: "1rem", md: "2.1875rem" },
               alignSelf: "stretch",
               boxSizing: "border-box",
               marginBottom: { xs: 0.5, md: 1.5, lg: 3.5 }
@@ -512,7 +516,7 @@ const HistoryForm = ({ user }) => {
             className="row-3"
             sx={{
               display: "flex",
-              height: { xs: "7rem", md: "6.5rem" },
+              height: { xs: "7rem", md: "9rem" },
               padding: "0.625rem",
               alignItems: "center",
               alignSelf: "stretch",
