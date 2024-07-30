@@ -47,7 +47,7 @@ const NavBar = () => {
             height: "4.3125rem",
             padding: "var(--none, 0rem) var(--3, 1.5rem)",
             alignItems: "center",
-            gap: { xs: "13rem", md: "30rem", xl: "65rem", xxl: "85rem" },
+            justifyContent: "space-between",          
             flexShrink: 0,
             alignSelf: "stretch",
             boxSizing: "border-box"
