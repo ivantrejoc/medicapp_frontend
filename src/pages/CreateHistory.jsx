@@ -20,7 +20,6 @@ const CreateHistory = () => {
     return (
       <Box
         sx={{
-          background: "plum",
           flexGrow: 1,
           width: "100%",
           height: "100%",
@@ -29,7 +28,7 @@ const CreateHistory = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-around",         
+          justifyContent: "space-around",
           overflowY: { xs: "scroll", md: "hidden" }
         }}
       >
