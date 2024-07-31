@@ -47,7 +47,7 @@ const SignInForm = () => {
     try {
       const response = await login(data);
       const status = response.status;
-      if(status === false) {
+      if (status === false) {
         setMessage(response.data);
         setOpenAlert(true);
       }
@@ -63,10 +63,11 @@ const SignInForm = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start",
+        justifyContent: "space-beetwen",
         alignItems: "center",
+        padding: "1rem",
         width: { xs: "19.9375rem", md: "34.5rem" },
-        height: { xs: "30.4375rem", md: "37.4375rem" },
+        height: { xs: "30.6375rem", md: "34.4375rem" },
         marginLeft: { xs: "9.5rem", lg: "0rem" },
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
@@ -107,7 +108,7 @@ const SignInForm = () => {
         sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
-          height: { xs: "18.8rem", md: "25.0625rem" },
+          height: { xs: "19.5rem", md: "22.8rem" },
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -143,9 +144,9 @@ const SignInForm = () => {
           className="inputs-wrapper"
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{
+          sx={{           
             display: "flex",
-            height: { xs: "14rem", md: "20rem" },
+            height: { xs: "14.5rem", md: "17.5rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -158,9 +159,9 @@ const SignInForm = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: "0.625rem",
+              height: { xs: "8.5rem", md: "11rem" },
               alignItems: "center",
-              gap: { xs: "2rem" },
+              justifyContent: "space-between",
               alignSelf: "stretch",
               boxSizing: "border-box",
               marginBottom: { xs: 1.5, md: 2 }
@@ -195,8 +196,9 @@ const SignInForm = () => {
                     }
                   }}
                   sx={{
-                    display: "flex",
+                                        display: "flex",
                     width: "100%",
+                    height: { xs: "3.6rem", md: "4.5rem" },
                     flexDirection: "column",
                     alignItems: "flex-start",
                     boxSizing: "border-box",
@@ -233,9 +235,10 @@ const SignInForm = () => {
                       margin: 0
                     }
                   }}
-                  sx={{
+                  sx={{                   
                     display: "flex",
                     width: "100%",
+                    height: { xs: "3.6rem", md: "4.5rem" },
                     flexDirection: "column",
                     alignItems: "flex-start",
                     boxSizing: "border-box",
@@ -249,15 +252,15 @@ const SignInForm = () => {
           </Box>
           <Box
             id="row-3"
-            sx={{
+            sx={{             
               display: "flex",
-              height: { xs: "2rem", md: "6.5rem" },
+              height: "2rem",
               padding: "0.625rem",
-              gap: { xs: 2, md: 15 },
               alignItems: "center",
+              justifyContent: "space-between",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 0.25, md: 5.5 }
+              marginBottom: { xs: 1, md: 1.5 }
             }}
           >
             <Link
@@ -265,7 +268,7 @@ const SignInForm = () => {
               sx={{
                 color: "rgba(30, 188, 223, 1)",
                 fontFeatureSettings: "'clig' off, 'liga' off",
-                fontSize: { xs: "0.575rem", md: "0.875rem" },
+                fontSize: { xs: "0.755rem", md: "0.875rem" },
                 fontStyle: "normal",
                 fontWeight: "500",
                 lineHeight: "143%",
@@ -279,7 +282,7 @@ const SignInForm = () => {
               sx={{
                 color: "rgba(30, 188, 223, 1)",
                 fontFeatureSettings: "'clig' off, 'liga' off",
-                fontSize: { xs: "0.575rem", md: "0.875rem" },
+                fontSize: { xs: "0.755rem", md: "0.875rem" },
                 fontStyle: "normal",
                 fontWeight: "500",
                 lineHeight: "143%",
@@ -294,7 +297,7 @@ const SignInForm = () => {
             size="medium"
             variant="formButton"
             sx={{
-              height: { xs: "2rem", sm: "inherit" }
+              height: "2.5rem"
             }}
           >
             Sign in

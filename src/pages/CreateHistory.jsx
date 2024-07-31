@@ -19,17 +19,20 @@ const CreateHistory = () => {
   if (user && loading === false) {
     return (
       <Box
-        sx={{
+        sx={{          
           flexGrow: 1,
           width: "100%",
           height: "100%",
           maxWidth: "100%",
           maxHeight: { md: "100vh" },
+          marginTop: "0vh",          
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "space-around",
-          overflowY: { xs: "scroll", md: "hidden" }
+          padding: "2rem",
+          overflowY: { xs: "scroll", md: "hidden" },
+          boxSizing: "border-box"
         }}
       >
         <HistoryForm user={user} />

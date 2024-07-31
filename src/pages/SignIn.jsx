@@ -15,11 +15,11 @@ const SignIn = () => {
         width: "100%",
         height: "100%",
         maxWidth: "100%",
-        maxHeight: { md: "100vh" },
+        maxHeight: {xs: "none", md: "100vh" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        overflow: "hidden"
+        overflow: {xs: "scroll", md:"hidden"}
       }}
     >
       {isMobile || isTablet ? (

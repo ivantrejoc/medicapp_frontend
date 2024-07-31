@@ -38,7 +38,9 @@ const History = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          overflow: "hidden"
+          padding: "2rem",
+          overflow: "hidden",
+          boxSizing: "border-box"
         }}
       >
         <MedicalHistory user={user} />

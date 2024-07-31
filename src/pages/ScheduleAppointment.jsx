@@ -20,7 +20,7 @@ const ScheduleAppointment = () => {
 
   return (
     <Box
-      sx={{
+      sx={{       
         flexGrow: 1,
         width: "100%",
         height: "100%",
@@ -29,8 +29,11 @@ const ScheduleAppointment = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        paddingTop: "6rem",
+        paddingBottom: "2rem",      
         overflowX: "hidden",
-        overflowY: { xs: "visible", md: "hidden" }
+        overflowY: { xs: "visible", md: "hidden" },
+        boxSizing: "border-box"
       }}
     >
       <ScheduleForm user={user} />

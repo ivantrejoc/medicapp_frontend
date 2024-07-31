@@ -58,7 +58,7 @@ const PatientAppointments = ({ user }) => {
     setCurrentPage(pageNumber);
   };
 
-  if (loading) {
+  if (loading && !currentAppointments) {
     return <Loading />;
   }
 

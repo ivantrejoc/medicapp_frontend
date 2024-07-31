@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Paper,
   Box,
@@ -7,12 +8,18 @@ import {
   Button,
   Link
 } from "@mui/material";
+import AlertModal from "../AlertModal/AlertModal";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import PhoneInput from "../PhoneInput/PhoneInput";
 import medicappLogo from "/img/medicapp-logo.webp";
 import { createPatient } from "../../services/userServices";
 
 const SignInForm = () => {
+  const [message, setMessage] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     control,
@@ -43,7 +50,15 @@ const SignInForm = () => {
     const response = await createPatient(patientData);
     const responseMessage = response.body.message;
     reset();
-    alert(responseMessage);
+    setOpenAlert(true);
+    setMessage(responseMessage);
+  };
+
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+    if (message === "Patient created successfully") {
+      navigate("/");
+    }
   };
 
   return (
@@ -55,13 +70,21 @@ const SignInForm = () => {
         justifyContent: "flex-start",
         alignItems: "center",
         width: { xs: "19.9375rem", md: "34.5rem" },
-        height: { xs: "43.2375rem", md: "45.6875rem" },
+        height: { xs: "42.2375rem", md: "44.6875rem" },
         marginLeft: { xs: "9.5rem", lg: "0rem" },
+        padding: "1rem",
         flexShrink: 0,
         background: "var(--background-paper-elevation-6, #FFF)",
         boxSizing: "border-box"
       }}
     >
+      {openAlert && (
+        <AlertModal
+          open={openAlert}
+          message={message}
+          onClose={handleCloseAlert}
+        />
+      )}
       <Box
         className="logo-wrapper"
         sx={{
@@ -86,10 +109,10 @@ const SignInForm = () => {
       </Box>
       <Box
         className="form"
-        sx={{          
+        sx={{         
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
-          height: { xs: "37.8rem", md: "39.2875rem" },
+          height: "37.1rem",
           flexDirection: "column",
           alignItems: "flex-start",
           flexShrink: 0,
@@ -125,9 +148,9 @@ const SignInForm = () => {
           className="inputs-wrapper"
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{            
+          sx={{
             display: "flex",
-            height: { xs: "33rem", md: "34.6rem" },
+            height: { xs: "32.3rem", md: "32.5rem" },
             flexDirection: "column",
             alignItems: "flex-start",
             flexShrink: 0,
@@ -137,16 +160,16 @@ const SignInForm = () => {
         >
           <Box
             className="row-1"
-            sx={{              
+            sx={{
               display: "flex",
               flexDirection: "column",
-              height: { xs: "30rem", md: "32rem" },
+              height: "27rem",
               padding: "0.625rem",
               alignItems: "center",
               gap: "1rem",
               alignSelf: "stretch",
               boxSizing: "border-box",
-              marginBottom: { xs: 0, md: 1.5 }
+              marginBottom: { xs: 1, md: 1.5 }
             }}
           >
             <Controller
@@ -180,6 +203,7 @@ const SignInForm = () => {
                   }}
                   sx={{
                     width: "100%",
+                    height: "3.5rem",
                     boxSizing: "border-box",
                     "& .MuiInputBase-root": {
                       width: "100%"
@@ -219,6 +243,7 @@ const SignInForm = () => {
                   }}
                   sx={{
                     width: "100%",
+                    height: "3.5rem",
                     boxSizing: "border-box",
                     "& .MuiInputBase-root": {
                       width: "100%"
@@ -258,6 +283,7 @@ const SignInForm = () => {
                   }}
                   sx={{
                     width: "100%",
+                    height: "3.5rem",
                     boxSizing: "border-box",
                     "& .MuiInputBase-root": {
                       width: "100%"
@@ -326,6 +352,7 @@ const SignInForm = () => {
                   }}
                   sx={{
                     width: "100%",
+                    height: "3.5rem",
                     boxSizing: "border-box",
                     "& .MuiInputBase-root": {
                       width: "100%"
@@ -365,6 +392,7 @@ const SignInForm = () => {
                   }}
                   sx={{
                     width: "100%",
+                    height: "3.5rem",
                     boxSizing: "border-box",
                     "& .MuiInputBase-root": {
                       width: "100%"
@@ -405,7 +433,7 @@ const SignInForm = () => {
             size="medium"
             variant="formButton"
             sx={{
-              height: "2rem"
+              height: "2.5rem"
             }}
           >
             Sign up

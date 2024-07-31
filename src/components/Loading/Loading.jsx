@@ -4,18 +4,19 @@ import "./loading.css";
 const Loading = () => {
   return (
     <Box
-      sx={{
+      sx={{       
         flexGrow: 1,
         width: "25%",
         height: "25%",
         maxWidth: "100%",
-        maxHeight: { md: "100vh" },
+        maxHeight: { md: "100vh" },        
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        overflow: { md: "hidden" },
-        overflowY: { xs: "auto", md: "hidden" }
+        marginLeft: {xs:"36vw", md: 0},
+        overflow:  "hidden",
+       
       }}
     >
       <div className="progress"></div>

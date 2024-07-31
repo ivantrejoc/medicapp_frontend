@@ -36,6 +36,11 @@ const PhoneInput = ({ value, onChange, ...restProps }) => {
       onChange={handlePhoneValueChange}
       type="tel"
       inputRef={inputRef}
+      sx={{
+        width: "100%",
+        height: "3.5rem",
+        boxSizing: "border-box"
+      }}
       InputProps={{
         startAdornment: (
           <InputAdornment

@@ -14,6 +14,7 @@ import {
   useMediaQuery
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import BasicData from "../BasicData/BasicData";
 import AlertModal from "../AlertModal/AlertModal";
@@ -22,9 +23,12 @@ import { createHistory } from "../../services/historyServices";
 const HistoryForm = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
+  
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
+
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -71,6 +75,14 @@ const HistoryForm = ({ user }) => {
     setOpenAlert(true);
   };
 
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
+    if (message === "Medical History created successfuly") {
+      navigate("/history");
+    }
+  };
+
+
   return (
     <Paper
       elevation={6}
@@ -92,7 +104,7 @@ const HistoryForm = ({ user }) => {
         <AlertModal
           open={openAlert}
           message={message}
-          onClose={() => setOpenAlert(false)}
+          onClose={handleCloseAlert}
         />
       )}
       {(isMobile || isTablet) && (
