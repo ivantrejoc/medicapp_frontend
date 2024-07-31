@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { SignInForm } from "../components/SigInForm";
-import calendarDoctor from "/img/doctor-calendar.png";
+import calendarDoctor from "/img/doctor-calendar.webp";
 
 const SignIn = () => {
   const theme = useTheme();

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import PhoneInput from "../PhoneInput/PhoneInput";
-import medicappLogo from "/img/medicapp-logo.png";
+import medicappLogo from "/img/medicapp-logo.webp";
 import { createPatient } from "../../services/userServices";
 
 const SignInForm = () => {

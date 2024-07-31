@@ -14,7 +14,7 @@ import { useTheme } from "@mui/material/styles";
 import { useForm, Controller } from "react-hook-form";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import medicappLogo from "/img/medicapp-logo.png";
+import medicappLogo from "/img/medicapp-logo.webp";
 
 const SignInForm = () => {
   const [message, setMessage] = useState(null);

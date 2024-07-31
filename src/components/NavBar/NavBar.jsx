@@ -60,7 +60,7 @@ const NavBar = () => {
                 width: "3.0625rem",
                 height: "3.0625rem",
                 background:
-                  "url('/img/medicapp-cross-no-bg.png') 100% / cover no-repeat",
+                  "url('/img/medicapp-cross-no-bg.webp') 100% / cover no-repeat",
                 boxSizing: "border-box"
               }}
             />
@@ -71,7 +71,7 @@ const NavBar = () => {
                 width: "8.9375rem",
                 height: "3.0625rem",
                 background:
-                  "url('/img/medicapp-logo.png') 100% / cover no-repeat",
+                  "url('/img/medicapp-logo.webp') 100% / cover no-repeat",
                 boxSizing: "border-box"
               }}
             />
