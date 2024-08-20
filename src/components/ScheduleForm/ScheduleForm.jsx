@@ -99,10 +99,10 @@ const ScheduleForm = ({ user }) => {
     setOpenAlert(true);
   };
 
-  const handleCloseAlert = () =>{
+  const handleCloseAlert = () => {
     setOpenAlert(false);
     navigate("/appointments");
-  }
+  };
 
   return (
     <Paper
@@ -292,9 +292,9 @@ const ScheduleForm = ({ user }) => {
                     <option
                       key={medic.id}
                       id={medic.id}
-                      value={`${medic.name} ${medic.surname}`}
+                      value={`${medic.name} ${medic.lastName}`}
                     >
-                      {`${medic.name} ${medic.surname}`}
+                      {`${medic.name} ${medic.lastName}`}
                     </option>
                   ))}
                 </TextField>
