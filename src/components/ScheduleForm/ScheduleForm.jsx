@@ -50,6 +50,7 @@ const ScheduleForm = ({ user }) => {
     defaultValues: {
       patientId: "",
       medicId: "",
+      medic: "",
       specialismId: "",
       specialism: "",
       date: "",
@@ -62,8 +63,7 @@ const ScheduleForm = ({ user }) => {
 
   const onSubmit = async (data) => {
     const { medic, specialism, appointmentDate, appointmentHour, comments } =
-      data;
-
+      data;    
     const selectedSpecialism = specialties.find((s) => s.name === specialism);
     const specialismId = selectedSpecialism ? selectedSpecialism.id : null;
 
@@ -79,7 +79,9 @@ const ScheduleForm = ({ user }) => {
     const appointmentData = {
       patientId: userId,
       medicId: medicId,
+      medic: medic,
       specialismId: specialismId,
+      specialism: specialism,
       date: cleanDate,
       hour: cleanHour,
       comments: comments
