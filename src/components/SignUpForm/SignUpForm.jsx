@@ -29,7 +29,7 @@ const SignInForm = () => {
   } = useForm({
     defaultValues: {
       name: "",
-      surname: "",
+      lastName: "",
       email: "",
       phone: "",
       role: "Patient",
@@ -38,17 +38,17 @@ const SignInForm = () => {
     }
   });
   const onSubmit = async (data) => {
-    const { name, surname, email, phone, role, password } = data;
+    const { name, lastName, email, phone, role, password } = data;
     const patientData = {
       name,
-      surname,
+      lastName,
       email,
       phone,
       role,
       password
     };
     const response = await createPatient(patientData);
-    const responseMessage = response.body.message;
+    const responseMessage = response.message;
     reset();
     setOpenAlert(true);
     setMessage(responseMessage);
@@ -56,7 +56,7 @@ const SignInForm = () => {
 
   const handleCloseAlert = () => {
     setOpenAlert(false);
-    if (message === "Patient created successfully") {
+    if (message === "Patient successfully created") {
       navigate("/");
     }
   };
@@ -109,7 +109,7 @@ const SignInForm = () => {
       </Box>
       <Box
         className="form"
-        sx={{         
+        sx={{
           display: "flex",
           width: { xs: "17.1875rem", md: "32.1875rem" },
           height: "37.1rem",
@@ -253,7 +253,7 @@ const SignInForm = () => {
               )}
             />
             <Controller
-              name="surname"
+              name="lastName"
               control={control}
               rules={{
                 required: "Last name is required",
@@ -270,8 +270,8 @@ const SignInForm = () => {
                   type="text"
                   label="Last name"
                   placeholder="Doe"
-                  error={!!errors.surname}
-                  helperText={errors.surname ? errors.surname.message : null}
+                  error={!!errors.lastName}
+                  helperText={errors.lastName ? errors.lastName.message : null}
                   InputLabelProps={{
                     shrink: true
                   }}

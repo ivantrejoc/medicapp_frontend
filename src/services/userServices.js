@@ -1,15 +1,20 @@
 import axios from "axios";
 
-const URL = import.meta.env.VITE_API_URL;
+// Production
+// const URL = import.meta.env.VITE_API_URL;
+
+const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const createPatient = async (patientData) => {
   try {
-    const response = await axios.post(`${URL}/patients`, patientData);
-    if (response.status === 200) {
+    const response = await axios.post(`${URL}/patients/signup`, patientData);
+    if (response.status === 201) {
       return response.data;
     }
+    throw new Error(response.error.message);
   } catch (error) {
-    return error.response;
+    console.error("ERROR EN SERVICE: ", error);
+    return error.message;
   }
 };
 
@@ -31,8 +36,8 @@ export const signIn = async (userData) => {
           lastName: userFound.surname
         }
       };
-    }else {
-      throw new Error('Invalid credentials');
+    } else {
+      throw new Error("Invalid credentials");
     }
   } catch (error) {
     return {

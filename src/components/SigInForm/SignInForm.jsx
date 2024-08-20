@@ -40,8 +40,7 @@ const SignInForm = () => {
     if (isAuth) {
       navigate("/appointments/schedule");
     }
-  }, [isAuth, navigate]);
-  console.log("isAuth en el form: ", isAuth);
+  }, [isAuth, navigate]);  
 
   const onSubmit = async (data) => {
     try {
