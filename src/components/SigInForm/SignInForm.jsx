@@ -185,6 +185,7 @@ const SignInForm = () => {
                   placeholder="jhon@mail.com"
                   error={!!errors.email}
                   helperText={errors.email ? errors.email.message : null}
+                  autoComplete="email"
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -225,6 +226,7 @@ const SignInForm = () => {
                   type="password"
                   error={!!errors.password}
                   helperText={errors.password ? errors.password.message : null}
+                  autoComplete="current-password"
                   InputLabelProps={{
                     shrink: true
                   }}
