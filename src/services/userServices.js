@@ -42,3 +42,19 @@ export const getPatientById = async (id) => {
     return error.response;
   }
 };
+
+
+export const signOut = async () => {
+  try {
+    const response = await axios.post(`${URL}/auth/signout`);
+    if (response.status !== 200) {
+      throw new Error(response.data.message);
+    }
+    return response.data;
+  } catch (error) {
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
+  }
+};

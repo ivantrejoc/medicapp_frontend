@@ -1,5 +1,5 @@
 import { useEffect, createContext, useState } from "react";
-import { signIn } from "../services/userServices";
+import { signIn, signOut } from "../services/userServices";
 
 export const authContext = createContext();
 
@@ -43,11 +43,22 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    setCurrentUser(null);
-    setIsAuth(false);
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("isAuth");
+  const logout = async () => {
+    try {
+      const response = await signOut();
+      if(!response.message === "Logged out successfully" ){
+        throw new Error(response.error);
+      }
+      setCurrentUser(null);
+        setIsAuth(false);
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("isAuth");
+    } catch (error) {
+      return {
+        status: error.response.status,
+        message: error.response.message
+      };
+    }
   };
 
   const value = {
