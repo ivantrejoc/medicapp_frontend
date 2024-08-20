@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const URL = import.meta.env.VITE_API_URL;
+// const URL = import.meta.env.VITE_API_URL;
+
+const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const getAppointmentsById = async (id) => {
   try {
@@ -14,11 +16,25 @@ export const getAppointmentsById = async (id) => {
 
 export const createAppointment = async (appointmentData) => {
   try {
-    const response = await axios.post(`${URL}/appointments`, appointmentData);
-    if (response.status === 200) {
-      return response.data;
+    const user = await JSON.parse(localStorage.getItem("currentUser"));
+    const jwtToken = user.token;
+    const response = await axios.post(
+      `${URL}/appointments/create`,
+      appointmentData,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      }
+    );
+    if (response.status !== 201) {
+      throw new Error(response.data.message);
     }
+    return response.data;
   } catch (error) {
-    return error.message;
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };

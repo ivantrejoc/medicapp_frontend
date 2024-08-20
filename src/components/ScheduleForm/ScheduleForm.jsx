@@ -49,20 +49,16 @@ const ScheduleForm = ({ user }) => {
   } = useForm({
     defaultValues: {
       patientId: "",
-      patient: "",
       medicId: "",
-      medic: "",
       specialismId: "",
       specialism: "",
-      appointmentDate: "",
-      appointmentHour: "",
+      date: "",
+      hour: "",
       comments: ""
     }
   });
 
   const userId = user?.id;
-  const userName = user?.name;
-  const userLastName = user?.lastName;
 
   const onSubmit = async (data) => {
     const { medic, specialism, appointmentDate, appointmentHour, comments } =
@@ -71,37 +67,40 @@ const ScheduleForm = ({ user }) => {
     const selectedSpecialism = specialties.find((s) => s.name === specialism);
     const specialismId = selectedSpecialism ? selectedSpecialism.id : null;
 
-    const [medicName, medicSurname] = medic.split(" ");
-    const selectedMedic = medics.find(
-      (m) => m.name === medicName && m.surname === medicSurname
-    );
-    const medicId = selectedMedic ? selectedMedic.id : null;
+    const medicNameSplitted = medic.split(" ");
+    const medicName = medicNameSplitted[0];
+    const selectedMedic = medics.find((m) => m.name === medicName);
+
+    const medicId = selectedMedic ? selectedMedic.medicId : null;
 
     const cleanDate = appointmentDate.format("YYYY-MM-DD");
     const cleanHour = appointmentHour.format("HH:mm:ss");
 
     const appointmentData = {
-      patient_id: userId,
-      medic_id: medicId,
-      specialism_id: specialismId,
-      appointment_date: cleanDate,
-      appointment_hour: cleanHour,
-      comments: comments,
-      patient_name: `${userName} ${userLastName}`,
-      medic_name: medic,
-      specialism: specialism
+      patientId: userId,
+      medicId: medicId,
+      specialismId: specialismId,
+      date: cleanDate,
+      hour: cleanHour,
+      comments: comments
     };
-
     const response = await createAppointment(appointmentData);
-    const responseMessage = await response.body.message;
-    reset();
+    const responseMessage = await response.message;
+    if (responseMessage === "Appointment successfully created") {
+      reset();
+      setMessage(responseMessage);
+      setOpenAlert(true);
+    }
     setMessage(responseMessage);
     setOpenAlert(true);
   };
 
   const handleCloseAlert = () => {
+    if (message === "Appointment successfully created") {
+      setOpenAlert(false);
+      navigate("/appointments");
+    }
     setOpenAlert(false);
-    navigate("/appointments");
   };
 
   return (
@@ -238,7 +237,7 @@ const ScheduleForm = ({ user }) => {
                   <option value="">Select specialism</option>
                   {specialties?.map((specialism) => (
                     <option
-                      key={specialism.id}
+                      key={specialism?.id}
                       id={specialism.id}
                       value={specialism.name}
                     >
@@ -290,8 +289,8 @@ const ScheduleForm = ({ user }) => {
                   <option value="">Select medic</option>
                   {medics?.map((medic) => (
                     <option
-                      key={medic.id}
-                      id={medic.id}
+                      key={medic?.medicId}
+                      id={medic.medicId}
                       value={`${medic.name} ${medic.lastName}`}
                     >
                       {`${medic.name} ${medic.lastName}`}
