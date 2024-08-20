@@ -40,19 +40,19 @@ const SignInForm = () => {
     if (isAuth) {
       navigate("/appointments/schedule");
     }
-  }, [isAuth, navigate]);  
+  }, [isAuth, navigate]);
 
   const onSubmit = async (data) => {
     try {
-      const response = await login(data);
+      const response = await login(data);      
       const status = response.status;
-      if (status === false) {
-        setMessage(response.data);
-        setOpenAlert(true);
+      if (status === "User Unauthenticated") {
+        throw new Error(response.message);
       }
-      reset();
     } catch (error) {
-      console.error;
+      setMessage(error.message);
+      setOpenAlert(true);
+      reset();
     }
   };
 
@@ -143,7 +143,7 @@ const SignInForm = () => {
           className="inputs-wrapper"
           component="form"
           onSubmit={handleSubmit(onSubmit)}
-          sx={{           
+          sx={{
             display: "flex",
             height: { xs: "14.5rem", md: "17.5rem" },
             flexDirection: "column",
@@ -195,7 +195,7 @@ const SignInForm = () => {
                     }
                   }}
                   sx={{
-                                        display: "flex",
+                    display: "flex",
                     width: "100%",
                     height: { xs: "3.6rem", md: "4.5rem" },
                     flexDirection: "column",
@@ -234,7 +234,7 @@ const SignInForm = () => {
                       margin: 0
                     }
                   }}
-                  sx={{                   
+                  sx={{
                     display: "flex",
                     width: "100%",
                     height: { xs: "3.6rem", md: "4.5rem" },
@@ -251,7 +251,7 @@ const SignInForm = () => {
           </Box>
           <Box
             id="row-3"
-            sx={{             
+            sx={{
               display: "flex",
               height: "2rem",
               padding: "0.625rem",
