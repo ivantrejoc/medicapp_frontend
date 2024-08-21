@@ -14,7 +14,7 @@ const CreateHistory = () => {
     }
   }, []);
 
-  console.log("EL USER EN LA VISTA HISTORY: ", user);
+  
 
   if (user && loading === false) {
     return (

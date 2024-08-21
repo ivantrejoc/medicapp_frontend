@@ -1,10 +1,19 @@
 import axios from "axios";
+import { json } from "react-router-dom";
 
-const URL = import.meta.env.VITE_API_URL;
+// const URL = import.meta.env.VITE_API_URL;
+
+const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const getStories = async () => {
   try {
-    const rawResponse = await axios.get(`${URL}/stories`);
+    const user = await JSON.parse(localStorage.getItem("currentUser"));
+    const jwtToken = user.token;
+    const rawResponse = await axios.get(`${URL}/stories`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`
+      }
+    });
     const response = await rawResponse.data.body.stories;
     if (rawResponse.status === 200) {
       return response;
@@ -16,12 +25,26 @@ export const getStories = async () => {
 
 export const createHistory = async (historyData) => {
   try {
-    const response = await axios.post(`${URL}/history`, historyData);
-    if (response.status === 200) {
-      return response.data;
+    const user = await JSON.parse(localStorage.getItem("currentUser"));
+    const jwtToken = user.token;
+    const response = await axios.post(
+      `${URL}/medical-stories/create`,
+      historyData,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      }
+    );
+    if (response.status !== 201) {
+      throw new Error(response.data.message);
     }
+    return response.data;
   } catch (error) {
-    return error.message;
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };
 
