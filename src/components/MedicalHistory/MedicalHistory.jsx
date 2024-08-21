@@ -47,29 +47,29 @@ const MedicalHistory = ({ user }) => {
     loadStoryById(id);
   }, [id, fetchStoryById]);
 
-  console.log("HISTORY IN COMPONENT: ", historyById);
+  
 
-  const deleteHandler = async (id, patientId) => {
+  const deleteHandler = async (patientId) => {    
     try {
-      const response = await deleteHistory(id, patientId);
-      if (response.statusCode === 200) {
-        console.log(response);
-        setOpenAlert(true);
-        setMessage(response.body.message);
+      console.log("PATIENT ID IN HANDLER: ",patientId);
+      const response = await deleteHistory(patientId);
+      if (response.statusCode !== 200) {
+        throw new Error(response.message);
       }
+      console.log(response);
+      setOpenAlert(true);
+      setMessage(response.message);
     } catch (error) {
-      console.error(error.message);
       setOpenAlert(true);
       setMessage(error.message);
     }
   };
 
- const onClose = () => {
+  const onClose = () => {
     setOpenAlert(false);
     setMessage(null);
-    navigate("/history/create")
+    navigate("/history/create");
   };
- 
 
   if (loading) {
     return <Loading />;
@@ -92,11 +92,7 @@ const MedicalHistory = ({ user }) => {
       }}
     >
       {openAlert && (
-        <AlertModal
-          open={openAlert}
-          message={message}
-          onClose={onClose}
-        />
+        <AlertModal open={openAlert} message={message} onClose={onClose} />
       )}
       {(isMobile || isTablet) && <BasicData name={name} lastName={lastName} />}
       <Box
@@ -418,7 +414,7 @@ const MedicalHistory = ({ user }) => {
               size="small"
               startIcon={<DeleteIcon />}
               onClick={() =>
-                deleteHandler(historyById.id, historyById.patient_id)
+                deleteHandler( historyById.patientId)
               }
               sx={{
                 paddingX: 1,

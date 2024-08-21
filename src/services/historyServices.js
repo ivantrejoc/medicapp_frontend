@@ -16,10 +16,10 @@ export const getStoryById = async (patientId) => {
         }
       }
     );
-    const response = await rawResponse.data.medicalStory;    
+    const response = await rawResponse.data.medicalStory;
     if (rawResponse.status !== 200) {
       throw new Error(response.data.message);
-    }    
+    }
     return response;
   } catch (error) {
     return {
@@ -65,16 +65,26 @@ export const editHistory = async (historyData) => {
   }
 };
 
-export const deleteHistory = async (id, patientId) => {
+export const deleteHistory = async (patientId) => {
   try {
+    const user = await JSON.parse(localStorage.getItem("currentUser"));
+    const jwtToken = user.token;
     const response = await axios.delete(
-      `${URL}/history?id=${id}&patient_id=${patientId}`
+      `${URL}/medical-stories/delete/${patientId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      }
     );
-    if (response.status === 200) {
-      console.log("RESPUESTA DE SERVICE:", response.data);
-      return response.data;
+    if (response.status !== 200) {
+      throw new Error(response.data.message);
     }
+    return response.data;
   } catch (error) {
-    return error.message;
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };
