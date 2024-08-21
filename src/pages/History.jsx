@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { useStories } from "../store/storiesState";
 import MedicalHistory from "../components/MedicalHistory/MedicalHistory";
 
 const History = () => {
@@ -11,20 +10,9 @@ const History = () => {
     const storedUser = localStorage.getItem("currentUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+      setLoading(false);
     }
   }, []);
-
-  const { fetchStories } = useStories((state) => ({
-    fetchStories: state.fetchStories
-  }));
-
-  useEffect(() => {
-    const loadStories = async () => {
-      await fetchStories();
-      setLoading(false);
-    };
-    loadStories();
-  }, [fetchStories]);
 
   if (user && loading === false) {
     return (

@@ -1,25 +1,31 @@
 import axios from "axios";
-import { json } from "react-router-dom";
 
 // const URL = import.meta.env.VITE_API_URL;
 
 const URL = import.meta.env.VITE_DEV_API_URL;
 
-export const getStories = async () => {
+export const getStoryById = async (patientId) => {
   try {
     const user = await JSON.parse(localStorage.getItem("currentUser"));
     const jwtToken = user.token;
-    const rawResponse = await axios.get(`${URL}/stories`, {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`
+    const rawResponse = await axios.get(
+      `${URL}/medical-stories/story/${patientId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
       }
-    });
-    const response = await rawResponse.data.body.stories;
-    if (rawResponse.status === 200) {
-      return response;
-    }
+    );
+    const response = await rawResponse.data.medicalStory;    
+    if (rawResponse.status !== 200) {
+      throw new Error(response.data.message);
+    }    
+    return response;
   } catch (error) {
-    return error.message;
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };
 

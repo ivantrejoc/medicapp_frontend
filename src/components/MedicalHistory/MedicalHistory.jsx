@@ -47,6 +47,8 @@ const MedicalHistory = ({ user }) => {
     loadStoryById(id);
   }, [id, fetchStoryById]);
 
+  console.log("HISTORY IN COMPONENT: ", historyById);
+
   const deleteHandler = async (id, patientId) => {
     try {
       const response = await deleteHistory(id, patientId);
