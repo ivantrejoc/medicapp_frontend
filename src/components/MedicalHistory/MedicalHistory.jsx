@@ -47,11 +47,8 @@ const MedicalHistory = ({ user }) => {
     loadStoryById(id);
   }, [id, fetchStoryById]);
 
-  
-
-  const deleteHandler = async (patientId) => {    
+  const deleteHandler = async (patientId) => {
     try {
-      console.log("PATIENT ID IN HANDLER: ",patientId);
       const response = await deleteHistory(patientId);
       if (response.statusCode !== 200) {
         throw new Error(response.message);
@@ -413,9 +410,7 @@ const MedicalHistory = ({ user }) => {
             <Button
               size="small"
               startIcon={<DeleteIcon />}
-              onClick={() =>
-                deleteHandler( historyById.patientId)
-              }
+              onClick={() => deleteHandler(historyById.patientId)}
               sx={{
                 paddingX: 1,
                 background: "#FA7670",
