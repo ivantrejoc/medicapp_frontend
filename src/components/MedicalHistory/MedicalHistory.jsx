@@ -157,10 +157,10 @@ const MedicalHistory = ({ user }) => {
               marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
-            <DisplayData label={"Age"} value={historyById.age} />
-            <DisplayData label={"Height"} value={historyById.height} />
-            <DisplayData label={"Weight"} value={historyById.weight} />
-            <DisplayData label={"BMI"} value={historyById.bmi} />
+            <DisplayData label={"Age"} value={historyById.age ?? ""} />
+            <DisplayData label={"Height"} value={historyById.height ?? ""} />
+            <DisplayData label={"Weight"} value={historyById.weight ?? ""} />
+            <DisplayData label={"BMI"} value={historyById.bmi ?? ""} />
           </Box>
           <Box
             id="row-2"
@@ -379,7 +379,7 @@ const MedicalHistory = ({ user }) => {
           >
             <DisplayDataMulti
               label={"Comorbilities"}
-              value={historyById.comorbilities}
+              value={historyById.comorbilities ?? []}
             />
           </Box>
           <Box

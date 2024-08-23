@@ -1,30 +1,19 @@
 import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { EditHistoryForm } from "../components/EditHistoryForm";
-import { useStories } from "../store/storiesState";
 
 const EditHistory = () => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(null);
-  const { fetchStories } = useStories((state) => ({
-    fetchStories: state.fetchStories,
-    stories: state.stories
-  }));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    const currentUser = localStorage.getItem("currentUser");
+    const user = JSON.parse(currentUser);
+    if (user) {
+      setUser(user);
+      setLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-    const loadStories = async () => {
-      await fetchStories();
-      setLoading(false);
-    };
-    loadStories();
-  }, [fetchStories]);
 
   if (user && loading === false) {
     return (

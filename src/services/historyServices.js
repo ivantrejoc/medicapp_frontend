@@ -54,14 +54,28 @@ export const createHistory = async (historyData) => {
   }
 };
 
-export const editHistory = async (historyData) => {
+export const editHistory = async (storyId, historyData) => {
   try {
-    const response = await axios.put(`${URL}/history`, historyData);
-    if (response.status === 200) {
-      return response.data;
+    const user = await JSON.parse(localStorage.getItem("currentUser"));
+    const jwtToken = user.token;
+    const response = await axios.put(
+      `${URL}/medical-stories/edit/${storyId}`,
+      historyData,
+      {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`
+        }
+      }
+    );
+    if (response.status !== 200) {
+      throw new Error(response.data.message);
     }
+    return response.data;
   } catch (error) {
-    return error.message;
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };
 
