@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// const URL = import.meta.env.VITE_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
-const URL = import.meta.env.VITE_DEV_API_URL;
+// const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const getMedics = async () => {
   try {

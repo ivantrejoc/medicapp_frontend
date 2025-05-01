@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // Production
-// const URL = import.meta.env.VITE_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
-const URL = import.meta.env.VITE_DEV_API_URL;
+// const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const createPatient = async (patientData) => {
   try {
