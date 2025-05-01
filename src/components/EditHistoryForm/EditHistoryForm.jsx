@@ -47,6 +47,7 @@ const EditHistoryForm = ({ user }) => {
   }, [id, fetchStoryById]);
 
   const story = historyById;
+  const { storyId } = story;
 
   const {
     handleSubmit,
@@ -71,8 +72,6 @@ const EditHistoryForm = ({ user }) => {
   const onSubmit = async (data) => {
     const formData = {
       ...data,
-      id: story.id,
-      patient_id: story.patient_id,
       smoking: data.smoking ? "yes" : "no",
       drugs: data.drugs ? "yes" : "no",
       hypertension: data.hypertension ? "yes" : "no",
@@ -85,8 +84,10 @@ const EditHistoryForm = ({ user }) => {
     const historyData = {
       ...formData
     };
-    const response = await editHistory(historyData);
-    const responseMessage = await response.body.message;
+    
+    const response = await editHistory(storyId, historyData);    
+    const responseMessage = await response.message;
+    if(responseMessage === "Medical story updated successfully")
     reset();
     setMessage(responseMessage);
     setOpenAlert(true);
@@ -94,7 +95,7 @@ const EditHistoryForm = ({ user }) => {
 
   const handleCloseAlert = () => {
     setOpenAlert(false);
-    if (message === "History updated") {
+    if (message === "Medical story updated successfully") {
       navigate("/history");
     }
   };
@@ -209,7 +210,7 @@ const EditHistoryForm = ({ user }) => {
                   size="small"
                   variant="outlined"
                   label="Age"
-                  placeholder={story.age}
+                  placeholder={story.age.toString()}
                   error={!!errors.age}
                   helperText={errors.age ? errors.age.message : null}
                   InputLabelProps={{

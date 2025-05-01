@@ -23,7 +23,7 @@ import { createHistory } from "../../services/historyServices";
 const HistoryForm = ({ user }) => {
   const [message, setMessage] = useState(null);
   const [openAlert, setOpenAlert] = useState(false);
-  
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.only("md"));
@@ -66,22 +66,26 @@ const HistoryForm = ({ user }) => {
 
     const historyData = {
       ...formData,
-      patient_id: userId
+      patientId: userId
     };
     const response = await createHistory(historyData);
-    const responseMessage = await response.body.message;
-    reset();
+    const responseMessage = await response.message;
+    if (responseMessage === "Medical story created successfully") {
+      reset();
+      setMessage(responseMessage);
+      setOpenAlert(true);
+    }
+
     setMessage(responseMessage);
     setOpenAlert(true);
   };
 
   const handleCloseAlert = () => {
     setOpenAlert(false);
-    if (message === "Medical History created successfuly") {
+    if (message === "Medical story created successfully") {
       navigate("/history");
     }
   };
-
 
   return (
     <Paper

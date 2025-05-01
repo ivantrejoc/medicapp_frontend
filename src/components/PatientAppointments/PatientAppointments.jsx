@@ -45,7 +45,6 @@ const PatientAppointments = ({ user }) => {
   }, [id, setLoading, fetchAppointmentsById]);
 
   const appointments = appointmentsById;
-
   const indexOfLastAppointment = currentPage * pageSize;
   const indexOfFirstAppointment = indexOfLastAppointment - pageSize;
 
@@ -223,7 +222,7 @@ const PatientAppointments = ({ user }) => {
                 <TableBody>
                   {currentAppointments &&
                     currentAppointments.map((appointment) => (
-                      <TableRow key={appointment.id}>
+                      <TableRow key={appointment.appointmentId}>
                         <TableCell>
                           <Checkbox
                             size={"small"}
@@ -238,13 +237,9 @@ const PatientAppointments = ({ user }) => {
                           />
                         </TableCell>
                         <TableCell>{appointment.specialism}</TableCell>
-                        <TableCell>{appointment.medic_name}</TableCell>
-                        <TableCell>
-                          {appointment.appointment_date?.slice(0, 10)}
-                        </TableCell>
-                        <TableCell>
-                          {appointment.appointment_hour?.slice(0, 5)}
-                        </TableCell>
+                        <TableCell>{appointment.medic}</TableCell>
+                        <TableCell>{appointment.date?.slice(0, 10)}</TableCell>
+                        <TableCell>{appointment.hour?.slice(0, 5)}</TableCell>
                       </TableRow>
                     ))}
                 </TableBody>

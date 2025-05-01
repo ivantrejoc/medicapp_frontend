@@ -341,6 +341,7 @@ const SignInForm = () => {
                   placeholder="Type your password"
                   error={!!errors.password}
                   helperText={errors.password ? errors.password.message : null}
+                 autoComplete="password"
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -381,6 +382,7 @@ const SignInForm = () => {
                   helperText={
                     errors.repeatPassword ? errors.repeatPassword.message : null
                   }
+                  autoComplete="repeat-password"
                   InputLabelProps={{
                     shrink: true
                   }}

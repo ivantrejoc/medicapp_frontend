@@ -1,9 +1,9 @@
 import axios from "axios";
 
 // Production
-// const URL = import.meta.env.VITE_API_URL;
+const URL = import.meta.env.VITE_API_URL;
 
-const URL = import.meta.env.VITE_DEV_API_URL;
+// const URL = import.meta.env.VITE_DEV_API_URL;
 
 export const createPatient = async (patientData) => {
   try {
@@ -20,29 +20,15 @@ export const createPatient = async (patientData) => {
 
 export const signIn = async (userData) => {
   try {
-    const response = await axios.get(`${URL}/patients`);
-    const apiUsers = response.data.body.patients;
-    const userFound = await apiUsers?.find(
-      (apiUser) =>
-        apiUser.email === userData.email &&
-        apiUser.password === userData.password
-    );
-    if (userFound) {
-      return {
-        status: true,
-        data: {
-          id: userFound.id,
-          name: userFound.name,
-          lastName: userFound.surname
-        }
-      };
-    } else {
-      throw new Error("Invalid credentials");
+    const response = await axios.post(`${URL}/auth/signin`, userData);
+    if (response.status !== 200) {
+      throw new Error(response.data.message);
     }
+    return response.data;
   } catch (error) {
     return {
-      status: false,
-      data: error.message
+      status: error.response.status,
+      message: error.response.data.message
     };
   }
 };
@@ -54,5 +40,21 @@ export const getPatientById = async (id) => {
     return patient;
   } catch (error) {
     return error.response;
+  }
+};
+
+
+export const signOut = async () => {
+  try {
+    const response = await axios.post(`${URL}/auth/signout`);
+    if (response.status !== 200) {
+      throw new Error(response.data.message);
+    }
+    return response.data;
+  } catch (error) {
+    return {
+      status: error.response.status,
+      message: error.response.data.message
+    };
   }
 };

@@ -1,22 +1,11 @@
 import { create } from "zustand";
-import { getStories } from "../services/historyServices";
+import { getStoryById } from "../services/historyServices";
 
-export const useStories = create((set, get) => ({
-  stories: [],
+export const useStories = create((set) => ({
   historyById: [],
-  fetchStories: async () => {
-    const response = await getStories();
-    set((state) => ({
-      ...state,
-      stories: response
-    }));
-  },
-  fetchStoryById: async (id) => {
+  fetchStoryById: async (patientId) => {
     try {
-      const state = await get();
-      const story = await state.stories.find(
-        (story) => story.patient_id === id
-      );
+      const story = await getStoryById(patientId);
       if (story) {
         set((state) => ({
           ...state,

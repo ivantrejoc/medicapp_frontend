@@ -47,27 +47,26 @@ const MedicalHistory = ({ user }) => {
     loadStoryById(id);
   }, [id, fetchStoryById]);
 
-  const deleteHandler = async (id, patientId) => {
+  const deleteHandler = async (patientId) => {
     try {
-      const response = await deleteHistory(id, patientId);
-      if (response.statusCode === 200) {
-        console.log(response);
-        setOpenAlert(true);
-        setMessage(response.body.message);
+      const response = await deleteHistory(patientId);
+      if (response.statusCode !== 200) {
+        throw new Error(response.message);
       }
+      console.log(response);
+      setOpenAlert(true);
+      setMessage(response.message);
     } catch (error) {
-      console.error(error.message);
       setOpenAlert(true);
       setMessage(error.message);
     }
   };
 
- const onClose = () => {
+  const onClose = () => {
     setOpenAlert(false);
     setMessage(null);
-    navigate("/history/create")
+    navigate("/history/create");
   };
- 
 
   if (loading) {
     return <Loading />;
@@ -90,11 +89,7 @@ const MedicalHistory = ({ user }) => {
       }}
     >
       {openAlert && (
-        <AlertModal
-          open={openAlert}
-          message={message}
-          onClose={onClose}
-        />
+        <AlertModal open={openAlert} message={message} onClose={onClose} />
       )}
       {(isMobile || isTablet) && <BasicData name={name} lastName={lastName} />}
       <Box
@@ -159,10 +154,10 @@ const MedicalHistory = ({ user }) => {
               marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
-            <DisplayData label={"Age"} value={historyById.age} />
-            <DisplayData label={"Height"} value={historyById.height} />
-            <DisplayData label={"Weight"} value={historyById.weight} />
-            <DisplayData label={"BMI"} value={historyById.bmi} />
+            <DisplayData label={"Age"} value={historyById.age ?? ""} />
+            <DisplayData label={"Height"} value={historyById.height ?? ""} />
+            <DisplayData label={"Weight"} value={historyById.weight ?? ""} />
+            <DisplayData label={"BMI"} value={historyById.bmi ?? ""} />
           </Box>
           <Box
             id="row-2"
@@ -381,7 +376,7 @@ const MedicalHistory = ({ user }) => {
           >
             <DisplayDataMulti
               label={"Comorbilities"}
-              value={historyById.comorbilities}
+              value={historyById.comorbilities ?? []}
             />
           </Box>
           <Box
@@ -415,9 +410,7 @@ const MedicalHistory = ({ user }) => {
             <Button
               size="small"
               startIcon={<DeleteIcon />}
-              onClick={() =>
-                deleteHandler(historyById.id, historyById.patient_id)
-              }
+              onClick={() => deleteHandler(historyById.patientId)}
               sx={{
                 paddingX: 1,
                 background: "#FA7670",

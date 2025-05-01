@@ -1,5 +1,5 @@
 import { useEffect, createContext, useState } from "react";
-import { signIn } from "../services/userServices";
+import { signIn, signOut } from "../services/userServices";
 
 export const authContext = createContext();
 
@@ -20,29 +20,45 @@ export const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     try {
       const userCredential = await signIn(userData);
-      const status = userCredential.status;
-      const user = userCredential.data;
-      if (status === true) {
-        setCurrentUser(user);
-        setIsAuth(true);
-        return userCredential;
-      } else {
-        throw new Error(userCredential.data);
+      const user = {
+        status: userCredential.message,
+        id: userCredential.id,
+        name: userCredential.name,
+        lastName: userCredential.lastName,
+        email: userCredential.email,
+        token: userCredential.token
+      };
+      if (user.status !== "User Authenticated") {
+        throw new Error(userCredential.message);
       }
+      setCurrentUser(user);
+      setIsAuth(true);
+      return user.status;
     } catch (error) {
       setError(error.message);
       return {
-        status: false,
-        data: error.message
+        status: "User Unauthenticated",
+        message: error.message
       };
     }
   };
 
-  const logout = () => {
-    setCurrentUser(null);
-    setIsAuth(false);
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("isAuth");
+  const logout = async () => {
+    try {
+      const response = await signOut();
+      if(!response.message === "Logged out successfully" ){
+        throw new Error(response.error);
+      }
+      setCurrentUser(null);
+        setIsAuth(false);
+        localStorage.removeItem("currentUser");
+        localStorage.removeItem("isAuth");
+    } catch (error) {
+      return {
+        status: error.response.status,
+        message: error.response.message
+      };
+    }
   };
 
   const value = {
