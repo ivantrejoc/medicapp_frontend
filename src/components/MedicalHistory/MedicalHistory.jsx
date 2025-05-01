@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Paper,
   Box,
@@ -46,6 +46,8 @@ const MedicalHistory = ({ user }) => {
     };
     loadStoryById(id);
   }, [id, fetchStoryById]);
+
+  const memoHistoryById = useMemo(() => historyById, [historyById]);
 
   const deleteHandler = async (patientId) => {
     try {
@@ -154,10 +156,16 @@ const MedicalHistory = ({ user }) => {
               marginBottom: { xs: 1.5, md: 3.5 }
             }}
           >
-            <DisplayData label={"Age"} value={historyById.age ?? ""} />
-            <DisplayData label={"Height"} value={historyById.height ?? ""} />
-            <DisplayData label={"Weight"} value={historyById.weight ?? ""} />
-            <DisplayData label={"BMI"} value={historyById.bmi ?? ""} />
+            <DisplayData label={"Age"} value={memoHistoryById.age ?? ""} />
+            <DisplayData
+              label={"Height"}
+              value={memoHistoryById.height ?? ""}
+            />
+            <DisplayData
+              label={"Weight"}
+              value={memoHistoryById.weight ?? ""}
+            />
+            <DisplayData label={"BMI"} value={memoHistoryById.bmi ?? ""} />
           </Box>
           <Box
             id="row-2"
@@ -183,7 +191,7 @@ const MedicalHistory = ({ user }) => {
                 boxSizing: "border-box"
               }}
             >
-              {historyById.smoking === "yes" ? (
+              {memoHistoryById.smoking === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -221,7 +229,7 @@ const MedicalHistory = ({ user }) => {
                 boxSizing: "border-box"
               }}
             >
-              {historyById.drugs === "yes" ? (
+              {memoHistoryById.drugs === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -259,7 +267,7 @@ const MedicalHistory = ({ user }) => {
                 boxSizing: "border-box"
               }}
             >
-              {historyById.hypertension === "yes" ? (
+              {memoHistoryById.hypertension === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -297,7 +305,7 @@ const MedicalHistory = ({ user }) => {
                 boxSizing: "border-box"
               }}
             >
-              {historyById.medication === "yes" ? (
+              {memoHistoryById.medication === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -335,7 +343,7 @@ const MedicalHistory = ({ user }) => {
                 boxSizing: "border-box"
               }}
             >
-              {historyById.alcohol === "yes" ? (
+              {memoHistoryById.alcohol === "yes" ? (
                 <DoneIcon
                   sx={{
                     fontSize: "medium"
@@ -376,7 +384,7 @@ const MedicalHistory = ({ user }) => {
           >
             <DisplayDataMulti
               label={"Comorbilities"}
-              value={historyById.comorbilities ?? []}
+              value={memoHistoryById.comorbilities ?? []}
             />
           </Box>
           <Box

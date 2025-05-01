@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   Paper,
   Box,
@@ -44,11 +44,11 @@ const PatientAppointments = ({ user }) => {
     setLoading(false);
   }, [id, setLoading, fetchAppointmentsById]);
 
-  const appointments = appointmentsById;
+  const memoAppointments = useMemo(() => appointmentsById, [appointmentsById]);
   const indexOfLastAppointment = currentPage * pageSize;
   const indexOfFirstAppointment = indexOfLastAppointment - pageSize;
 
-  const currentAppointments = appointments?.slice(
+  const currentAppointments = memoAppointments?.slice(
     indexOfFirstAppointment,
     indexOfLastAppointment
   );
@@ -261,7 +261,7 @@ const PatientAppointments = ({ user }) => {
                       >
                         <Pagination
                           pageSize={pageSize}
-                          appointments={appointments || []}
+                          appointments={memoAppointments || []}
                           currentPage={currentPage}
                           pagination={pagination}
                         />
