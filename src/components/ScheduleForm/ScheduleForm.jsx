@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   Paper,
   Box,
@@ -60,16 +60,20 @@ const ScheduleForm = ({ user }) => {
   });
 
   const userId = user?.id;
+  const memoSpecialties = useMemo(() => specialties, [specialties]);
+  const memoMedics = useMemo(() => medics, [medics]);
 
   const onSubmit = async (data) => {
     const { medic, specialism, appointmentDate, appointmentHour, comments } =
-      data;    
-    const selectedSpecialism = specialties.find((s) => s.name === specialism);
+      data;
+    const selectedSpecialism = memoSpecialties.find(
+      (s) => s.name === specialism
+    );
     const specialismId = selectedSpecialism ? selectedSpecialism.id : null;
 
     const medicNameSplitted = medic.split(" ");
     const medicName = medicNameSplitted[0];
-    const selectedMedic = medics.find((m) => m.name === medicName);
+    const selectedMedic = memoMedics.find((m) => m.name === medicName);
 
     const medicId = selectedMedic ? selectedMedic.medicId : null;
 
