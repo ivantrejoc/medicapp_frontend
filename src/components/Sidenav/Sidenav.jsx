@@ -26,15 +26,14 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
   const [openAppointmens, setOpenAppointments] = useState(false);
   const [openMedicalHistory, setOpenMedicalHistory] = useState(false);
-  const [user, setUser] = useState(null);  
-  
-  useEffect(() =>{
-    const storedUser = JSON.parse(localStorage.getItem("currentUser"))
-    if (storedUser){
-      setUser(storedUser)
-    }    
-  }, [])
-  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   const toggleDrawer = () => {
     setDrawerExpanded(!drawerExpanded);
@@ -53,6 +52,15 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
     }
   };
 
+  const stringAvatar = (name, lastName) => {
+    return {
+      sx: {
+        bgcolor: "#6CF585"
+      },
+      children: `${name.split(" ")[0][0]}${lastName.split(" ")[0][0]}`
+    };
+  };
+
   return (
     <Drawer
       variant="permanent"
@@ -66,14 +74,14 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
           display: "flex",
           flexDirection: "column",
           boxSizing: "border-box",
-          background: "#E2E2E2",          
+          background: "#E2E2E2",
           alignItems: "center",
-          justifyContent: "space-between",         
+          justifyContent: "space-between"
         }
       }}
     >
       <Box
-        sx={{          
+        sx={{
           width: drawerExpanded ? { sm: "14rem", md: "14rem" } : "5rem",
           maxWidth: "14rem",
           height: "24.5rem",
@@ -108,7 +116,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         )}
         {drawerExpanded ? (
           <Collapse in={openAppointmens} timeout="auto" unmountOnExit>
-            <List sx={{height: "7rem"}} component="div" disablePadding>
+            <List sx={{ height: "7rem" }} component="div" disablePadding>
               <ListItemButton href="/appointments/schedule" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <EditCalendarIcon />
@@ -163,7 +171,7 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
         )}
         {drawerExpanded ? (
           <Collapse in={openMedicalHistory} timeout="auto" unmountOnExit>
-            <List sx={{height: "8rem"}} component="div" disablePadding>
+            <List sx={{ height: "8rem" }} component="div" disablePadding>
               <ListItemButton href="/history/create" sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <HistoryEduIcon />
@@ -220,12 +228,8 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
           >
             <Avatar
               content="text"
-              sx={{
-                background: "#6CF585"
-              }}
-            >
-              JD
-            </Avatar>
+              {...stringAvatar(user?.name, user?.lastName)}
+            />
           </Box>
           <Box
             sx={{
@@ -237,7 +241,9 @@ const Sidenav = ({ drawerExpanded, setDrawerExpanded }) => {
               boxSizing: "border-box"
             }}
           >
-            <Typography variant="avatarName">{user.name} {user.lastName}</Typography>
+            <Typography variant="avatarName">
+              {user?.name} {user?.lastName}
+            </Typography>
             <Typography variant="avatarRole">Patient</Typography>
           </Box>
         </Box>
